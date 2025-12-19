@@ -12,639 +12,498 @@
  * Do not edit the class manually.
  */
 
-import * as runtime from '../runtime'
-import type { Canyon, LocationCanyon, SimpleCanyon } from '../models/index'
+
+import * as runtime from '../runtime';
+import type {
+  Canyon,
+  LocationCanyon,
+  SimpleCanyon,
+} from '../models/index';
 import {
-  CanyonFromJSON,
-  CanyonToJSON,
-  LocationCanyonFromJSON,
-  LocationCanyonToJSON,
-  SimpleCanyonFromJSON,
-  SimpleCanyonToJSON,
-} from '../models/index'
+    CanyonFromJSON,
+    CanyonToJSON,
+    LocationCanyonFromJSON,
+    LocationCanyonToJSON,
+    SimpleCanyonFromJSON,
+    SimpleCanyonToJSON,
+} from '../models/index';
 
 export interface AddCanyonToFavouritesRequest {
-  canyonId: number
+    canyonId: number;
 }
 
 export interface CreateCanyonRequest {
-  canyon?: Canyon
+    canyon?: Canyon;
 }
 
 export interface DeleteCanyonRequest {
-  canyonId: number
+    canyonId: number;
 }
 
 export interface DeleteCanyonFromFavouritesRequest {
-  canyonId: number
+    canyonId: number;
 }
 
 export interface DownloadCanyonRequest {
-  canyonId: number
-  email?: boolean
+    canyonId: number;
+    email?: boolean;
 }
 
 export interface GetCanyonRequest {
-  canyonId: number
+    canyonId: number;
 }
 
 export interface GetCanyonsRequest {
-  name?: string
-  season?: string
-  river?: string
-  country?: string
-  population?: string
-  page?: number
-  size?: number
-  sort?: string
+    name?: string;
+    season?: string;
+    river?: string;
+    country?: string;
+    population?: string;
+    page?: number;
+    size?: number;
+    sort?: string;
 }
 
 export interface GetFavouriteCanyonsRequest {
-  name?: string
-  season?: string
-  river?: string
-  country?: string
-  population?: string
-  page?: number
-  size?: number
-  sort?: string
+    name?: string;
+    season?: string;
+    river?: string;
+    country?: string;
+    population?: string;
+    page?: number;
+    size?: number;
+    sort?: string;
 }
 
 export interface UpdateCanyonRequest {
-  canyonId: number
-  canyon?: Canyon
+    canyonId: number;
+    canyon?: Canyon;
 }
 
 /**
- *
+ * 
  */
 export class CanyonApi extends runtime.BaseAPI {
-  /**
-   * Add canyon to favourites
-   */
-  async addCanyonToFavouritesRaw(
-    requestParameters: AddCanyonToFavouritesRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['canyonId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonId',
-        'Required parameter "canyonId" was null or undefined when calling addCanyonToFavourites().',
-      )
+
+    /**
+     * Ad canyon to favourites
+     */
+    async addCanyonToFavouritesRaw(requestParameters: AddCanyonToFavouritesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['canyonId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonId',
+                'Required parameter "canyonId" was null or undefined when calling addCanyonToFavourites().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons/favourites/{canyonId}`.replace(`{${"canyonId"}}`, encodeURIComponent(String(requestParameters['canyonId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons/favourites/{canyonId}`.replace(
-          `{${'canyonId'}}`,
-          encodeURIComponent(String(requestParameters['canyonId'])),
-        ),
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.VoidApiResponse(response)
-  }
-
-  /**
-   * Add canyon to favourites
-   */
-  async addCanyonToFavourites(
-    requestParameters: AddCanyonToFavouritesRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.addCanyonToFavouritesRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * Create a new canyon
-   * Create a new canyon
-   */
-  async createCanyonRaw(
-    requestParameters: CreateCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Canyon>> {
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons`,
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-        body: CanyonToJSON(requestParameters['canyon']),
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => CanyonFromJSON(jsonValue))
-  }
-
-  /**
-   * Create a new canyon
-   * Create a new canyon
-   */
-  async createCanyon(
-    requestParameters: CreateCanyonRequest = {},
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Canyon> {
-    const response = await this.createCanyonRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * delete a canyon
-   * Deletes a canyon
-   */
-  async deleteCanyonRaw(
-    requestParameters: DeleteCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['canyonId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonId',
-        'Required parameter "canyonId" was null or undefined when calling deleteCanyon().',
-      )
+    /**
+     * Ad canyon to favourites
+     */
+    async addCanyonToFavourites(requestParameters: AddCanyonToFavouritesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.addCanyonToFavouritesRaw(requestParameters, initOverrides);
     }
 
-    const queryParameters: any = {}
+    /**
+     * Create a new canyon
+     * Create a new canyon
+     */
+    async createCanyonRaw(requestParameters: CreateCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Canyon>> {
+        const queryParameters: any = {};
 
-    const headerParameters: runtime.HTTPHeaders = {}
+        const headerParameters: runtime.HTTPHeaders = {};
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons/{canyonId}`.replace(
-          `{${'canyonId'}}`,
-          encodeURIComponent(String(requestParameters['canyonId'])),
-        ),
-        method: 'DELETE',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        headerParameters['Content-Type'] = 'application/json';
 
-    return new runtime.VoidApiResponse(response)
-  }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CanyonToJSON(requestParameters['canyon']),
+        }, initOverrides);
 
-  /**
-   * delete a canyon
-   * Deletes a canyon
-   */
-  async deleteCanyon(
-    requestParameters: DeleteCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.deleteCanyonRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * delete a canyon from favourites
-   * Deletes a favourite
-   */
-  async deleteCanyonFromFavouritesRaw(
-    requestParameters: DeleteCanyonFromFavouritesRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['canyonId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonId',
-        'Required parameter "canyonId" was null or undefined when calling deleteCanyonFromFavourites().',
-      )
+        return new runtime.JSONApiResponse(response, (jsonValue) => CanyonFromJSON(jsonValue));
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons/favourites/{canyonId}`.replace(
-          `{${'canyonId'}}`,
-          encodeURIComponent(String(requestParameters['canyonId'])),
-        ),
-        method: 'DELETE',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.VoidApiResponse(response)
-  }
-
-  /**
-   * delete a canyon from favourites
-   * Deletes a favourite
-   */
-  async deleteCanyonFromFavourites(
-    requestParameters: DeleteCanyonFromFavouritesRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.deleteCanyonFromFavouritesRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * Download canyon by id and return a PDF file
-   * Download a canyon
-   */
-  async downloadCanyonRaw(
-    requestParameters: DownloadCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Blob>> {
-    if (requestParameters['canyonId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonId',
-        'Required parameter "canyonId" was null or undefined when calling downloadCanyon().',
-      )
+    /**
+     * Create a new canyon
+     * Create a new canyon
+     */
+    async createCanyon(requestParameters: CreateCanyonRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Canyon> {
+        const response = await this.createCanyonRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    const queryParameters: any = {}
+    /**
+     * delete a canyon
+     * Deletes a canyon
+     */
+    async deleteCanyonRaw(requestParameters: DeleteCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['canyonId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonId',
+                'Required parameter "canyonId" was null or undefined when calling deleteCanyon().'
+            );
+        }
 
-    if (requestParameters['email'] != null) {
-      queryParameters['email'] = requestParameters['email']
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons/{canyonId}`.replace(`{${"canyonId"}}`, encodeURIComponent(String(requestParameters['canyonId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
     }
 
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons/{canyonId}/download`.replace(
-          `{${'canyonId'}}`,
-          encodeURIComponent(String(requestParameters['canyonId'])),
-        ),
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.BlobApiResponse(response)
-  }
-
-  /**
-   * Download canyon by id and return a PDF file
-   * Download a canyon
-   */
-  async downloadCanyon(
-    requestParameters: DownloadCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Blob> {
-    const response = await this.downloadCanyonRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Get canyon by id
-   * Get one canyon
-   */
-  async getCanyonRaw(
-    requestParameters: GetCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Canyon>> {
-    if (requestParameters['canyonId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonId',
-        'Required parameter "canyonId" was null or undefined when calling getCanyon().',
-      )
+    /**
+     * delete a canyon
+     * Deletes a canyon
+     */
+    async deleteCanyon(requestParameters: DeleteCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteCanyonRaw(requestParameters, initOverrides);
     }
 
-    const queryParameters: any = {}
+    /**
+     * delete a canyon from favourites
+     * Deletes a favourite
+     */
+    async deleteCanyonFromFavouritesRaw(requestParameters: DeleteCanyonFromFavouritesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['canyonId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonId',
+                'Required parameter "canyonId" was null or undefined when calling deleteCanyonFromFavourites().'
+            );
+        }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+        const queryParameters: any = {};
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons/{canyonId}`.replace(
-          `{${'canyonId'}}`,
-          encodeURIComponent(String(requestParameters['canyonId'])),
-        ),
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        const headerParameters: runtime.HTTPHeaders = {};
 
-    return new runtime.JSONApiResponse(response, (jsonValue) => CanyonFromJSON(jsonValue))
-  }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons/favourites/{canyonId}`.replace(`{${"canyonId"}}`, encodeURIComponent(String(requestParameters['canyonId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
 
-  /**
-   * Get canyon by id
-   * Get one canyon
-   */
-  async getCanyon(
-    requestParameters: GetCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Canyon> {
-    const response = await this.getCanyonRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Get all canyon filtering by differents fields
-   * Get all canyon
-   */
-  async getCanyonsRaw(
-    requestParameters: GetCanyonsRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Array<SimpleCanyon>>> {
-    const queryParameters: any = {}
-
-    if (requestParameters['name'] != null) {
-      queryParameters['name'] = requestParameters['name']
+        return new runtime.VoidApiResponse(response);
     }
 
-    if (requestParameters['season'] != null) {
-      queryParameters['season'] = requestParameters['season']
+    /**
+     * delete a canyon from favourites
+     * Deletes a favourite
+     */
+    async deleteCanyonFromFavourites(requestParameters: DeleteCanyonFromFavouritesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteCanyonFromFavouritesRaw(requestParameters, initOverrides);
     }
 
-    if (requestParameters['river'] != null) {
-      queryParameters['river'] = requestParameters['river']
+    /**
+     * Download canyon by id and return a PDF file
+     * Download a canyon
+     */
+    async downloadCanyonRaw(requestParameters: DownloadCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
+        if (requestParameters['canyonId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonId',
+                'Required parameter "canyonId" was null or undefined when calling downloadCanyon().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['email'] != null) {
+            queryParameters['email'] = requestParameters['email'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons/{canyonId}/download`.replace(`{${"canyonId"}}`, encodeURIComponent(String(requestParameters['canyonId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.BlobApiResponse(response);
     }
 
-    if (requestParameters['country'] != null) {
-      queryParameters['country'] = requestParameters['country']
+    /**
+     * Download canyon by id and return a PDF file
+     * Download a canyon
+     */
+    async downloadCanyon(requestParameters: DownloadCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
+        const response = await this.downloadCanyonRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['population'] != null) {
-      queryParameters['population'] = requestParameters['population']
+    /**
+     * Get canyon by id
+     * Get one canyon
+     */
+    async getCanyonRaw(requestParameters: GetCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Canyon>> {
+        if (requestParameters['canyonId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonId',
+                'Required parameter "canyonId" was null or undefined when calling getCanyon().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons/{canyonId}`.replace(`{${"canyonId"}}`, encodeURIComponent(String(requestParameters['canyonId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CanyonFromJSON(jsonValue));
     }
 
-    if (requestParameters['page'] != null) {
-      queryParameters['page'] = requestParameters['page']
+    /**
+     * Get canyon by id
+     * Get one canyon
+     */
+    async getCanyon(requestParameters: GetCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Canyon> {
+        const response = await this.getCanyonRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['size'] != null) {
-      queryParameters['size'] = requestParameters['size']
+    /**
+     * Get all canyon filtering by differents fields
+     * Get all canyon
+     */
+    async getCanyonsRaw(requestParameters: GetCanyonsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SimpleCanyon>>> {
+        const queryParameters: any = {};
+
+        if (requestParameters['name'] != null) {
+            queryParameters['name'] = requestParameters['name'];
+        }
+
+        if (requestParameters['season'] != null) {
+            queryParameters['season'] = requestParameters['season'];
+        }
+
+        if (requestParameters['river'] != null) {
+            queryParameters['river'] = requestParameters['river'];
+        }
+
+        if (requestParameters['country'] != null) {
+            queryParameters['country'] = requestParameters['country'];
+        }
+
+        if (requestParameters['population'] != null) {
+            queryParameters['population'] = requestParameters['population'];
+        }
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['size'] != null) {
+            queryParameters['size'] = requestParameters['size'];
+        }
+
+        if (requestParameters['sort'] != null) {
+            queryParameters['sort'] = requestParameters['sort'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SimpleCanyonFromJSON));
     }
 
-    if (requestParameters['sort'] != null) {
-      queryParameters['sort'] = requestParameters['sort']
+    /**
+     * Get all canyon filtering by differents fields
+     * Get all canyon
+     */
+    async getCanyons(requestParameters: GetCanyonsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<SimpleCanyon>> {
+        const response = await this.getCanyonsRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+    /**
+     * Get all canyon filtering by differents fields
+     * Get all canyon
+     */
+    async getFavouriteCanyonsRaw(requestParameters: GetFavouriteCanyonsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SimpleCanyon>>> {
+        const queryParameters: any = {};
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons`,
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        if (requestParameters['name'] != null) {
+            queryParameters['name'] = requestParameters['name'];
+        }
 
-    return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SimpleCanyonFromJSON))
-  }
+        if (requestParameters['season'] != null) {
+            queryParameters['season'] = requestParameters['season'];
+        }
 
-  /**
-   * Get all canyon filtering by differents fields
-   * Get all canyon
-   */
-  async getCanyons(
-    requestParameters: GetCanyonsRequest = {},
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Array<SimpleCanyon>> {
-    const response = await this.getCanyonsRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
+        if (requestParameters['river'] != null) {
+            queryParameters['river'] = requestParameters['river'];
+        }
 
-  /**
-   * Get all canyon filtering by differents fields
-   * Get all canyon
-   */
-  async getFavouriteCanyonsRaw(
-    requestParameters: GetFavouriteCanyonsRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Array<SimpleCanyon>>> {
-    const queryParameters: any = {}
+        if (requestParameters['country'] != null) {
+            queryParameters['country'] = requestParameters['country'];
+        }
 
-    if (requestParameters['name'] != null) {
-      queryParameters['name'] = requestParameters['name']
-    }
+        if (requestParameters['population'] != null) {
+            queryParameters['population'] = requestParameters['population'];
+        }
 
-    if (requestParameters['season'] != null) {
-      queryParameters['season'] = requestParameters['season']
-    }
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
 
-    if (requestParameters['river'] != null) {
-      queryParameters['river'] = requestParameters['river']
+        if (requestParameters['size'] != null) {
+            queryParameters['size'] = requestParameters['size'];
+        }
+
+        if (requestParameters['sort'] != null) {
+            queryParameters['sort'] = requestParameters['sort'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons/favourites`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SimpleCanyonFromJSON));
     }
 
-    if (requestParameters['country'] != null) {
-      queryParameters['country'] = requestParameters['country']
+    /**
+     * Get all canyon filtering by differents fields
+     * Get all canyon
+     */
+    async getFavouriteCanyons(requestParameters: GetFavouriteCanyonsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<SimpleCanyon>> {
+        const response = await this.getFavouriteCanyonsRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['population'] != null) {
-      queryParameters['population'] = requestParameters['population']
+    /**
+     * Get location from canyons
+     * Get Locations
+     */
+    async getLocationsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<LocationCanyon>>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons/map`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(LocationCanyonFromJSON));
     }
 
-    if (requestParameters['page'] != null) {
-      queryParameters['page'] = requestParameters['page']
+    /**
+     * Get location from canyons
+     * Get Locations
+     */
+    async getLocations(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<LocationCanyon>> {
+        const response = await this.getLocationsRaw(initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['size'] != null) {
-      queryParameters['size'] = requestParameters['size']
+    /**
+     * Update your canyon
+     * Update your canyon
+     */
+    async updateCanyonRaw(requestParameters: UpdateCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Canyon>> {
+        if (requestParameters['canyonId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonId',
+                'Required parameter "canyonId" was null or undefined when calling updateCanyon().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/canyons/{canyonId}`.replace(`{${"canyonId"}}`, encodeURIComponent(String(requestParameters['canyonId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CanyonToJSON(requestParameters['canyon']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CanyonFromJSON(jsonValue));
     }
 
-    if (requestParameters['sort'] != null) {
-      queryParameters['sort'] = requestParameters['sort']
+    /**
+     * Update your canyon
+     * Update your canyon
+     */
+    async updateCanyon(requestParameters: UpdateCanyonRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Canyon> {
+        const response = await this.updateCanyonRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons/favourites`,
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SimpleCanyonFromJSON))
-  }
-
-  /**
-   * Get all canyon filtering by differents fields
-   * Get all canyon
-   */
-  async getFavouriteCanyons(
-    requestParameters: GetFavouriteCanyonsRequest = {},
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Array<SimpleCanyon>> {
-    const response = await this.getFavouriteCanyonsRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Get location from canyons
-   * Get Locations
-   */
-  async getLocationsRaw(
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Array<LocationCanyon>>> {
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons/map`,
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) =>
-      jsonValue.map(LocationCanyonFromJSON),
-    )
-  }
-
-  /**
-   * Get location from canyons
-   * Get Locations
-   */
-  async getLocations(
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Array<LocationCanyon>> {
-    const response = await this.getLocationsRaw(initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Update your canyon
-   * Update your canyon
-   */
-  async updateCanyonRaw(
-    requestParameters: UpdateCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Canyon>> {
-    if (requestParameters['canyonId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonId',
-        'Required parameter "canyonId" was null or undefined when calling updateCanyon().',
-      )
-    }
-
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/canyons/{canyonId}`.replace(
-          `{${'canyonId'}}`,
-          encodeURIComponent(String(requestParameters['canyonId'])),
-        ),
-        method: 'PUT',
-        headers: headerParameters,
-        query: queryParameters,
-        body: CanyonToJSON(requestParameters['canyon']),
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => CanyonFromJSON(jsonValue))
-  }
-
-  /**
-   * Update your canyon
-   * Update your canyon
-   */
-  async updateCanyon(
-    requestParameters: UpdateCanyonRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Canyon> {
-    const response = await this.updateCanyonRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
 }

@@ -35,12 +35,13 @@ import { UserApi, type LoginRequest } from '@/api'
 import { useAuthDialog } from '@/stores/dialogs'
 import { ref } from 'vue'
 import RememberPasswrodD from './RememberPasswordD.vue'
+import { useUserStore } from '@/stores/user'
 
 const errorLogin = ref(false)
 const show1 = ref(true)
 const userApi = new UserApi()
 const rememberPassword = ref<boolean>(false)
-
+const userStore = useUserStore()
 const login = ref<LoginRequest>({
   email: '',
   updatePasswordRequest: { password: '' },
@@ -54,6 +55,7 @@ const enviar = async () => {
       const credentials = btoa(`${login.value.email}:${login.value.updatePasswordRequest.password}`)
       localStorage.setItem('authCredentials', credentials)
       localStorage.setItem('email', login.value.email)
+      userStore.logInUser()
       useAuthDialog().toogleAuthDialog()
     } else {
       errorLogin.value = true

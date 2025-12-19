@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { getImage } from '@/authCalls/ImageCalls'
+import { getImage } from '@/calls/ImageCalls'
 import { imageToStr } from '@/utils/Mapper'
 
 const props = defineProps<{
@@ -15,29 +15,40 @@ const props = defineProps<{
 }>()
 
 const imageStr = ref('')
-
 watch(
   () => props.image,
   async (image) => {
+    imageStr.value = '' // Limpia antes de intentar cargar una nueva
+
     if (image) {
-      const imageBlob = await getImage({ image: image, dir: props.dir })
-      imageStr.value = await imageToStr(imageBlob)
+      try {
+        const imageBlob = await getImage({ image, dir: props.dir })
+
+        if (imageBlob && imageBlob.size > 0) {
+          imageStr.value = await imageToStr(imageBlob)
+        } else {
+          console.warn('Imagen vacía o no encontrada')
+        }
+      } catch (error) {
+        console.error('Error al obtener la imagen:', error)
+      }
     }
   },
+  { immediate: true },
 )
 </script>
 <style scoped>
 .image-container {
   width: 100%;
-  height: 100%; /* Asegura que ocupe todo el espacio disponible */
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .responsive-image {
-  max-width: 100%; /* Asegura que la imagen no se salga del contenedor */
+  max-width: 100%;
   height: auto;
-  object-fit: cover; /* O use object-fit: contain, dependiendo de tu preferencia */
+  object-fit: cover;
 }
 </style>

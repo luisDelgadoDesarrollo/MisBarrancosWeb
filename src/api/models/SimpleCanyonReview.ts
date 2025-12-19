@@ -12,88 +12,85 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
-import type { SimpleUser } from './SimpleUser'
+import { mapValues } from '../runtime';
+import type { SimpleUser } from './SimpleUser';
 import {
-  SimpleUserFromJSON,
-  SimpleUserFromJSONTyped,
-  SimpleUserToJSON,
-  SimpleUserToJSONTyped,
-} from './SimpleUser'
-import type { SimpleCanyon } from './SimpleCanyon'
+    SimpleUserFromJSON,
+    SimpleUserFromJSONTyped,
+    SimpleUserToJSON,
+    SimpleUserToJSONTyped,
+} from './SimpleUser';
+import type { SimpleCanyon } from './SimpleCanyon';
 import {
-  SimpleCanyonFromJSON,
-  SimpleCanyonFromJSONTyped,
-  SimpleCanyonToJSON,
-  SimpleCanyonToJSONTyped,
-} from './SimpleCanyon'
+    SimpleCanyonFromJSON,
+    SimpleCanyonFromJSONTyped,
+    SimpleCanyonToJSON,
+    SimpleCanyonToJSONTyped,
+} from './SimpleCanyon';
 
 /**
- *
+ * 
  * @export
  * @interface SimpleCanyonReview
  */
 export interface SimpleCanyonReview {
-  /**
-   *
-   * @type {number}
-   * @memberof SimpleCanyonReview
-   */
-  canyonReviewId?: number
-  /**
-   *
-   * @type {SimpleCanyon}
-   * @memberof SimpleCanyonReview
-   */
-  canyon?: SimpleCanyon
-  /**
-   *
-   * @type {SimpleUser}
-   * @memberof SimpleCanyonReview
-   */
-  user?: SimpleUser
+    /**
+     * 
+     * @type {number}
+     * @memberof SimpleCanyonReview
+     */
+    canyonReviewId?: number;
+    /**
+     * 
+     * @type {SimpleCanyon}
+     * @memberof SimpleCanyonReview
+     */
+    canyon?: SimpleCanyon;
+    /**
+     * 
+     * @type {SimpleUser}
+     * @memberof SimpleCanyonReview
+     */
+    user?: SimpleUser;
 }
 
 /**
  * Check if a given object implements the SimpleCanyonReview interface.
  */
 export function instanceOfSimpleCanyonReview(value: object): value is SimpleCanyonReview {
-  return true
+    return true;
 }
 
 export function SimpleCanyonReviewFromJSON(json: any): SimpleCanyonReview {
-  return SimpleCanyonReviewFromJSONTyped(json, false)
+    return SimpleCanyonReviewFromJSONTyped(json, false);
 }
 
-export function SimpleCanyonReviewFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): SimpleCanyonReview {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonReviewId: json['canyonReviewId'] == null ? undefined : json['canyonReviewId'],
-    canyon: json['canyon'] == null ? undefined : SimpleCanyonFromJSON(json['canyon']),
-    user: json['user'] == null ? undefined : SimpleUserFromJSON(json['user']),
-  }
+export function SimpleCanyonReviewFromJSONTyped(json: any, ignoreDiscriminator: boolean): SimpleCanyonReview {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonReviewId': json['canyonReviewId'] == null ? undefined : json['canyonReviewId'],
+        'canyon': json['canyon'] == null ? undefined : SimpleCanyonFromJSON(json['canyon']),
+        'user': json['user'] == null ? undefined : SimpleUserFromJSON(json['user']),
+    };
 }
 
 export function SimpleCanyonReviewToJSON(json: any): SimpleCanyonReview {
-  return SimpleCanyonReviewToJSONTyped(json, false)
+    return SimpleCanyonReviewToJSONTyped(json, false);
 }
 
-export function SimpleCanyonReviewToJSONTyped(
-  value?: SimpleCanyonReview | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function SimpleCanyonReviewToJSONTyped(value?: SimpleCanyonReview | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonReviewId: value['canyonReviewId'],
-    canyon: SimpleCanyonToJSON(value['canyon']),
-    user: SimpleUserToJSON(value['user']),
-  }
+    return {
+        
+        'canyonReviewId': value['canyonReviewId'],
+        'canyon': SimpleCanyonToJSON(value['canyon']),
+        'user': SimpleUserToJSON(value['user']),
+    };
 }
+

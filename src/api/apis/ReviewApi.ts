@@ -12,453 +12,346 @@
  * Do not edit the class manually.
  */
 
-import * as runtime from '../runtime'
-import type { CanyonReview, CanyonReviewResponse, SimpleCanyonReview } from '../models/index'
+
+import * as runtime from '../runtime';
+import type {
+  CanyonReview,
+  CanyonReviewResponse,
+  SimpleCanyonReview,
+} from '../models/index';
 import {
-  CanyonReviewFromJSON,
-  CanyonReviewToJSON,
-  CanyonReviewResponseFromJSON,
-  CanyonReviewResponseToJSON,
-  SimpleCanyonReviewFromJSON,
-  SimpleCanyonReviewToJSON,
-} from '../models/index'
+    CanyonReviewFromJSON,
+    CanyonReviewToJSON,
+    CanyonReviewResponseFromJSON,
+    CanyonReviewResponseToJSON,
+    SimpleCanyonReviewFromJSON,
+    SimpleCanyonReviewToJSON,
+} from '../models/index';
 
 export interface CreateCanyonReviewRequest {
-  canyonReview: CanyonReview
+    canyonReview: CanyonReview;
 }
 
 export interface DeleteCanyonReviewRequest {
-  canyonReviewId: number
+    canyonReviewId: number;
 }
 
 export interface GetCanyonReviewRequest {
-  canyonReviewId: number
+    canyonReviewId: number;
 }
 
 export interface GetCanyonReviewsRequest {
-  canyonId?: number
-  page?: number
-  size?: number
-  sort?: string
+    canyonId?: number;
+    page?: number;
+    size?: number;
+    sort?: string;
 }
 
 export interface InsertUserIntoCanyonReviewRequest {
-  canyonReviewId: number
-  requestBody: Array<number>
+    canyonReviewId: number;
+    requestBody: Array<number>;
 }
 
 export interface ShareCanyonReviewRequest {
-  canyonReviewId: number
+    canyonReviewId: number;
 }
 
 export interface UpdateCanyonReviewRequest {
-  canyonReviewId: number
-  canyonReview?: CanyonReview
+    canyonReviewId: number;
+    canyonReview?: CanyonReview;
 }
 
 /**
- *
+ * 
  */
 export class ReviewApi extends runtime.BaseAPI {
-  /**
-   * Create a new review
-   * Create a new review
-   */
-  async createCanyonReviewRaw(
-    requestParameters: CreateCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<CanyonReviewResponse>> {
-    if (requestParameters['canyonReview'] == null) {
-      throw new runtime.RequiredError(
-        'canyonReview',
-        'Required parameter "canyonReview" was null or undefined when calling createCanyonReview().',
-      )
+
+    /**
+     * Create a new review
+     * Create a new review
+     */
+    async createCanyonReviewRaw(requestParameters: CreateCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CanyonReviewResponse>> {
+        if (requestParameters['canyonReview'] == null) {
+            throw new runtime.RequiredError(
+                'canyonReview',
+                'Required parameter "canyonReview" was null or undefined when calling createCanyonReview().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/reviews/canyon`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CanyonReviewToJSON(requestParameters['canyonReview']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CanyonReviewResponseFromJSON(jsonValue));
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/reviews/canyon`,
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-        body: CanyonReviewToJSON(requestParameters['canyonReview']),
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) =>
-      CanyonReviewResponseFromJSON(jsonValue),
-    )
-  }
-
-  /**
-   * Create a new review
-   * Create a new review
-   */
-  async createCanyonReview(
-    requestParameters: CreateCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<CanyonReviewResponse> {
-    const response = await this.createCanyonReviewRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * delete a review
-   * Deletes a review
-   */
-  async deleteCanyonReviewRaw(
-    requestParameters: DeleteCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['canyonReviewId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonReviewId',
-        'Required parameter "canyonReviewId" was null or undefined when calling deleteCanyonReview().',
-      )
+    /**
+     * Create a new review
+     * Create a new review
+     */
+    async createCanyonReview(requestParameters: CreateCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CanyonReviewResponse> {
+        const response = await this.createCanyonReviewRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    const queryParameters: any = {}
+    /**
+     * delete a review
+     * Deletes a review
+     */
+    async deleteCanyonReviewRaw(requestParameters: DeleteCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['canyonReviewId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonReviewId',
+                'Required parameter "canyonReviewId" was null or undefined when calling deleteCanyonReview().'
+            );
+        }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+        const queryParameters: any = {};
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/reviews/canyon/{canyonReviewId}`.replace(
-          `{${'canyonReviewId'}}`,
-          encodeURIComponent(String(requestParameters['canyonReviewId'])),
-        ),
-        method: 'DELETE',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        const headerParameters: runtime.HTTPHeaders = {};
 
-    return new runtime.VoidApiResponse(response)
-  }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/reviews/canyon/{canyonReviewId}`.replace(`{${"canyonReviewId"}}`, encodeURIComponent(String(requestParameters['canyonReviewId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
 
-  /**
-   * delete a review
-   * Deletes a review
-   */
-  async deleteCanyonReview(
-    requestParameters: DeleteCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.deleteCanyonReviewRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * Get review by id
-   * Get a review
-   */
-  async getCanyonReviewRaw(
-    requestParameters: GetCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<CanyonReviewResponse>> {
-    if (requestParameters['canyonReviewId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonReviewId',
-        'Required parameter "canyonReviewId" was null or undefined when calling getCanyonReview().',
-      )
+        return new runtime.VoidApiResponse(response);
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/reviews/canyon/{canyonReviewId}`.replace(
-          `{${'canyonReviewId'}}`,
-          encodeURIComponent(String(requestParameters['canyonReviewId'])),
-        ),
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) =>
-      CanyonReviewResponseFromJSON(jsonValue),
-    )
-  }
-
-  /**
-   * Get review by id
-   * Get a review
-   */
-  async getCanyonReview(
-    requestParameters: GetCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<CanyonReviewResponse> {
-    const response = await this.getCanyonReviewRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Get all review filtering by differents fields
-   * Get all review
-   */
-  async getCanyonReviewsRaw(
-    requestParameters: GetCanyonReviewsRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Array<SimpleCanyonReview>>> {
-    const queryParameters: any = {}
-
-    if (requestParameters['canyonId'] != null) {
-      queryParameters['canyonId'] = requestParameters['canyonId']
+    /**
+     * delete a review
+     * Deletes a review
+     */
+    async deleteCanyonReview(requestParameters: DeleteCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteCanyonReviewRaw(requestParameters, initOverrides);
     }
 
-    if (requestParameters['page'] != null) {
-      queryParameters['page'] = requestParameters['page']
+    /**
+     * Get review by id
+     * Get a review
+     */
+    async getCanyonReviewRaw(requestParameters: GetCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CanyonReviewResponse>> {
+        if (requestParameters['canyonReviewId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonReviewId',
+                'Required parameter "canyonReviewId" was null or undefined when calling getCanyonReview().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/reviews/canyon/{canyonReviewId}`.replace(`{${"canyonReviewId"}}`, encodeURIComponent(String(requestParameters['canyonReviewId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CanyonReviewResponseFromJSON(jsonValue));
     }
 
-    if (requestParameters['size'] != null) {
-      queryParameters['size'] = requestParameters['size']
+    /**
+     * Get review by id
+     * Get a review
+     */
+    async getCanyonReview(requestParameters: GetCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CanyonReviewResponse> {
+        const response = await this.getCanyonReviewRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['sort'] != null) {
-      queryParameters['sort'] = requestParameters['sort']
+    /**
+     * Get all review filtering by differents fields
+     * Get all review
+     */
+    async getCanyonReviewsRaw(requestParameters: GetCanyonReviewsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SimpleCanyonReview>>> {
+        const queryParameters: any = {};
+
+        if (requestParameters['canyonId'] != null) {
+            queryParameters['canyonId'] = requestParameters['canyonId'];
+        }
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['size'] != null) {
+            queryParameters['size'] = requestParameters['size'];
+        }
+
+        if (requestParameters['sort'] != null) {
+            queryParameters['sort'] = requestParameters['sort'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/reviews/canyon`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SimpleCanyonReviewFromJSON));
     }
 
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/reviews/canyon`,
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) =>
-      jsonValue.map(SimpleCanyonReviewFromJSON),
-    )
-  }
-
-  /**
-   * Get all review filtering by differents fields
-   * Get all review
-   */
-  async getCanyonReviews(
-    requestParameters: GetCanyonReviewsRequest = {},
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Array<SimpleCanyonReview>> {
-    const response = await this.getCanyonReviewsRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Insert an user on your review
-   * Insert an user on your review
-   */
-  async insertUserIntoCanyonReviewRaw(
-    requestParameters: InsertUserIntoCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['canyonReviewId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonReviewId',
-        'Required parameter "canyonReviewId" was null or undefined when calling insertUserIntoCanyonReview().',
-      )
+    /**
+     * Get all review filtering by differents fields
+     * Get all review
+     */
+    async getCanyonReviews(requestParameters: GetCanyonReviewsRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<SimpleCanyonReview>> {
+        const response = await this.getCanyonReviewsRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['requestBody'] == null) {
-      throw new runtime.RequiredError(
-        'requestBody',
-        'Required parameter "requestBody" was null or undefined when calling insertUserIntoCanyonReview().',
-      )
+    /**
+     * Insert an user on your review
+     * Insert an user on your review
+     */
+    async insertUserIntoCanyonReviewRaw(requestParameters: InsertUserIntoCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['canyonReviewId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonReviewId',
+                'Required parameter "canyonReviewId" was null or undefined when calling insertUserIntoCanyonReview().'
+            );
+        }
+
+        if (requestParameters['requestBody'] == null) {
+            throw new runtime.RequiredError(
+                'requestBody',
+                'Required parameter "requestBody" was null or undefined when calling insertUserIntoCanyonReview().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/reviews/canyon/{canyonReviewId}/share`.replace(`{${"canyonReviewId"}}`, encodeURIComponent(String(requestParameters['canyonReviewId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['requestBody'],
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/reviews/canyon/{canyonReviewId}/share`.replace(
-          `{${'canyonReviewId'}}`,
-          encodeURIComponent(String(requestParameters['canyonReviewId'])),
-        ),
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-        body: requestParameters['requestBody'],
-      },
-      initOverrides,
-    )
-
-    return new runtime.VoidApiResponse(response)
-  }
-
-  /**
-   * Insert an user on your review
-   * Insert an user on your review
-   */
-  async insertUserIntoCanyonReview(
-    requestParameters: InsertUserIntoCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.insertUserIntoCanyonReviewRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * Share your review qr
-   * Share your review qr
-   */
-  async shareCanyonReviewRaw(
-    requestParameters: ShareCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['canyonReviewId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonReviewId',
-        'Required parameter "canyonReviewId" was null or undefined when calling shareCanyonReview().',
-      )
+    /**
+     * Insert an user on your review
+     * Insert an user on your review
+     */
+    async insertUserIntoCanyonReview(requestParameters: InsertUserIntoCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.insertUserIntoCanyonReviewRaw(requestParameters, initOverrides);
     }
 
-    const queryParameters: any = {}
+    /**
+     * Share your review qr
+     * Share your review qr
+     */
+    async shareCanyonReviewRaw(requestParameters: ShareCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['canyonReviewId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonReviewId',
+                'Required parameter "canyonReviewId" was null or undefined when calling shareCanyonReview().'
+            );
+        }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+        const queryParameters: any = {};
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/reviews/canyon/{canyonReviewId}/share`.replace(
-          `{${'canyonReviewId'}}`,
-          encodeURIComponent(String(requestParameters['canyonReviewId'])),
-        ),
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        const headerParameters: runtime.HTTPHeaders = {};
 
-    return new runtime.VoidApiResponse(response)
-  }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/reviews/canyon/{canyonReviewId}/share`.replace(`{${"canyonReviewId"}}`, encodeURIComponent(String(requestParameters['canyonReviewId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
 
-  /**
-   * Share your review qr
-   * Share your review qr
-   */
-  async shareCanyonReview(
-    requestParameters: ShareCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.shareCanyonReviewRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * Update your review
-   * Update your review
-   */
-  async updateCanyonReviewRaw(
-    requestParameters: UpdateCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<CanyonReviewResponse>> {
-    if (requestParameters['canyonReviewId'] == null) {
-      throw new runtime.RequiredError(
-        'canyonReviewId',
-        'Required parameter "canyonReviewId" was null or undefined when calling updateCanyonReview().',
-      )
+        return new runtime.VoidApiResponse(response);
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
+    /**
+     * Share your review qr
+     * Share your review qr
+     */
+    async shareCanyonReview(requestParameters: ShareCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.shareCanyonReviewRaw(requestParameters, initOverrides);
     }
-    const response = await this.request(
-      {
-        path: `/reviews/canyon/{canyonReviewId}`.replace(
-          `{${'canyonReviewId'}}`,
-          encodeURIComponent(String(requestParameters['canyonReviewId'])),
-        ),
-        method: 'PUT',
-        headers: headerParameters,
-        query: queryParameters,
-        body: CanyonReviewToJSON(requestParameters['canyonReview']),
-      },
-      initOverrides,
-    )
 
-    return new runtime.JSONApiResponse(response, (jsonValue) =>
-      CanyonReviewResponseFromJSON(jsonValue),
-    )
-  }
+    /**
+     * Update your review
+     * Update your review
+     */
+    async updateCanyonReviewRaw(requestParameters: UpdateCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CanyonReviewResponse>> {
+        if (requestParameters['canyonReviewId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonReviewId',
+                'Required parameter "canyonReviewId" was null or undefined when calling updateCanyonReview().'
+            );
+        }
 
-  /**
-   * Update your review
-   * Update your review
-   */
-  async updateCanyonReview(
-    requestParameters: UpdateCanyonReviewRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<CanyonReviewResponse> {
-    const response = await this.updateCanyonReviewRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/reviews/canyon/{canyonReviewId}`.replace(`{${"canyonReviewId"}}`, encodeURIComponent(String(requestParameters['canyonReviewId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CanyonReviewToJSON(requestParameters['canyonReview']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CanyonReviewResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Update your review
+     * Update your review
+     */
+    async updateCanyonReview(requestParameters: UpdateCanyonReviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CanyonReviewResponse> {
+        const response = await this.updateCanyonReviewRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
 }

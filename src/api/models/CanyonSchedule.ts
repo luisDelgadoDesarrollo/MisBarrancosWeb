@@ -12,97 +12,86 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface CanyonSchedule
  */
 export interface CanyonSchedule {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonSchedule
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonSchedule
-   */
-  car?: number
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonSchedule
-   */
-  descentNumber?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonSchedule
-   */
-  approach?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonSchedule
-   */
-  descent?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonSchedule
-   */
-  _return?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonSchedule
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonSchedule
+     */
+    car?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonSchedule
+     */
+    approach?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonSchedule
+     */
+    descent?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonSchedule
+     */
+    _return?: string;
 }
 
 /**
  * Check if a given object implements the CanyonSchedule interface.
  */
 export function instanceOfCanyonSchedule(value: object): value is CanyonSchedule {
-  return true
+    return true;
 }
 
 export function CanyonScheduleFromJSON(json: any): CanyonSchedule {
-  return CanyonScheduleFromJSONTyped(json, false)
+    return CanyonScheduleFromJSONTyped(json, false);
 }
 
-export function CanyonScheduleFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): CanyonSchedule {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    car: json['car'] == null ? undefined : json['car'],
-    descentNumber: json['descentNumber'] == null ? undefined : json['descentNumber'],
-    approach: json['approach'] == null ? undefined : json['approach'],
-    descent: json['descent'] == null ? undefined : json['descent'],
-    _return: json['_return'] == null ? undefined : json['_return'],
-  }
+export function CanyonScheduleFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonSchedule {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'car': json['car'] == null ? undefined : json['car'],
+        'approach': json['approach'] == null ? undefined : json['approach'],
+        'descent': json['descent'] == null ? undefined : json['descent'],
+        '_return': json['_return'] == null ? undefined : json['_return'],
+    };
 }
 
 export function CanyonScheduleToJSON(json: any): CanyonSchedule {
-  return CanyonScheduleToJSONTyped(json, false)
+    return CanyonScheduleToJSONTyped(json, false);
 }
 
-export function CanyonScheduleToJSONTyped(
-  value?: CanyonSchedule | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonScheduleToJSONTyped(value?: CanyonSchedule | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonId: value['canyonId'],
-    car: value['car'],
-    descentNumber: value['descentNumber'],
-    approach: value['approach'],
-    descent: value['descent'],
-    _return: value['_return'],
-  }
+    return {
+        
+        'canyonId': value['canyonId'],
+        'car': value['car'],
+        'approach': value['approach'],
+        'descent': value['descent'],
+        '_return': value['_return'],
+    };
 }
+

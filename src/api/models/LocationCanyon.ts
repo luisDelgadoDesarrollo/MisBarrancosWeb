@@ -12,119 +12,102 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
-import type { CanyonDifficulty } from './CanyonDifficulty'
-import {
-  CanyonDifficultyFromJSON,
-  CanyonDifficultyFromJSONTyped,
-  CanyonDifficultyToJSON,
-  CanyonDifficultyToJSONTyped,
-} from './CanyonDifficulty'
-
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface LocationCanyon
  */
 export interface LocationCanyon {
-  /**
-   *
-   * @type {number}
-   * @memberof LocationCanyon
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof LocationCanyon
-   */
-  name?: string
-  /**
-   *
-   * @type {string}
-   * @memberof LocationCanyon
-   */
-  season?: string
-  /**
-   *
-   * @type {string}
-   * @memberof LocationCanyon
-   */
-  longitud?: string
-  /**
-   *
-   * @type {string}
-   * @memberof LocationCanyon
-   */
-  latitud?: string
-  /**
-   *
-   * @type {string}
-   * @memberof LocationCanyon
-   */
-  country?: string
-  /**
-   *
-   * @type {Array<CanyonDifficulty>}
-   * @memberof LocationCanyon
-   */
-  canyonDifficulty?: Array<CanyonDifficulty>
+    /**
+     * 
+     * @type {number}
+     * @memberof LocationCanyon
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LocationCanyon
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LocationCanyon
+     */
+    season?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LocationCanyon
+     */
+    longitud?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LocationCanyon
+     */
+    latitud?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LocationCanyon
+     */
+    country?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LocationCanyon
+     */
+    difficultyDesc?: string;
 }
 
 /**
  * Check if a given object implements the LocationCanyon interface.
  */
 export function instanceOfLocationCanyon(value: object): value is LocationCanyon {
-  return true
+    return true;
 }
 
 export function LocationCanyonFromJSON(json: any): LocationCanyon {
-  return LocationCanyonFromJSONTyped(json, false)
+    return LocationCanyonFromJSONTyped(json, false);
 }
 
-export function LocationCanyonFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): LocationCanyon {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    name: json['name'] == null ? undefined : json['name'],
-    season: json['season'] == null ? undefined : json['season'],
-    longitud: json['longitud'] == null ? undefined : json['longitud'],
-    latitud: json['latitud'] == null ? undefined : json['latitud'],
-    country: json['country'] == null ? undefined : json['country'],
-    canyonDifficulty:
-      json['canyonDifficulty'] == null
-        ? undefined
-        : (json['canyonDifficulty'] as Array<any>).map(CanyonDifficultyFromJSON),
-  }
+export function LocationCanyonFromJSONTyped(json: any, ignoreDiscriminator: boolean): LocationCanyon {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'season': json['season'] == null ? undefined : json['season'],
+        'longitud': json['longitud'] == null ? undefined : json['longitud'],
+        'latitud': json['latitud'] == null ? undefined : json['latitud'],
+        'country': json['country'] == null ? undefined : json['country'],
+        'difficultyDesc': json['difficultyDesc'] == null ? undefined : json['difficultyDesc'],
+    };
 }
 
 export function LocationCanyonToJSON(json: any): LocationCanyon {
-  return LocationCanyonToJSONTyped(json, false)
+    return LocationCanyonToJSONTyped(json, false);
 }
 
-export function LocationCanyonToJSONTyped(
-  value?: LocationCanyon | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function LocationCanyonToJSONTyped(value?: LocationCanyon | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonId: value['canyonId'],
-    name: value['name'],
-    season: value['season'],
-    longitud: value['longitud'],
-    latitud: value['latitud'],
-    country: value['country'],
-    canyonDifficulty:
-      value['canyonDifficulty'] == null
-        ? undefined
-        : (value['canyonDifficulty'] as Array<any>).map(CanyonDifficultyToJSON),
-  }
+    return {
+        
+        'canyonId': value['canyonId'],
+        'name': value['name'],
+        'season': value['season'],
+        'longitud': value['longitud'],
+        'latitud': value['latitud'],
+        'country': value['country'],
+        'difficultyDesc': value['difficultyDesc'],
+    };
 }
+

@@ -12,127 +12,118 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface UserOut
  */
 export interface UserOut {
-  /**
-   *
-   * @type {number}
-   * @memberof UserOut
-   */
-  userId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof UserOut
-   */
-  email?: string
-  /**
-   *
-   * @type {string}
-   * @memberof UserOut
-   */
-  name?: string
-  /**
-   *
-   * @type {string}
-   * @memberof UserOut
-   */
-  lastName?: string
-  /**
-   *
-   * @type {string}
-   * @memberof UserOut
-   */
-  location?: string
-  /**
-   *
-   * @type {string}
-   * @memberof UserOut
-   */
-  description?: string
-  /**
-   *
-   * @type {Date}
-   * @memberof UserOut
-   */
-  birthDay?: Date
-  /**
-   *
-   * @type {number}
-   * @memberof UserOut
-   */
-  plan?: number
-  /**
-   *
-   * @type {boolean}
-   * @memberof UserOut
-   */
-  guia?: boolean
-  /**
-   *
-   * @type {number}
-   * @memberof UserOut
-   */
-  age?: number
+    /**
+     * 
+     * @type {number}
+     * @memberof UserOut
+     */
+    userId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserOut
+     */
+    email?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserOut
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserOut
+     */
+    lastName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserOut
+     */
+    location?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserOut
+     */
+    description?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UserOut
+     */
+    birthDay?: Date;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UserOut
+     */
+    guia?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof UserOut
+     */
+    age?: number;
 }
 
 /**
  * Check if a given object implements the UserOut interface.
  */
 export function instanceOfUserOut(value: object): value is UserOut {
-  return true
+    return true;
 }
 
 export function UserOutFromJSON(json: any): UserOut {
-  return UserOutFromJSONTyped(json, false)
+    return UserOutFromJSONTyped(json, false);
 }
 
 export function UserOutFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserOut {
-  if (json == null) {
-    return json
-  }
-  return {
-    userId: json['userId'] == null ? undefined : json['userId'],
-    email: json['email'] == null ? undefined : json['email'],
-    name: json['name'] == null ? undefined : json['name'],
-    lastName: json['lastName'] == null ? undefined : json['lastName'],
-    location: json['location'] == null ? undefined : json['location'],
-    description: json['description'] == null ? undefined : json['description'],
-    birthDay: json['birthDay'] == null ? undefined : new Date(json['birthDay']),
-    plan: json['plan'] == null ? undefined : json['plan'],
-    guia: json['guia'] == null ? undefined : json['guia'],
-    age: json['age'] == null ? undefined : json['age'],
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'userId': json['userId'] == null ? undefined : json['userId'],
+        'email': json['email'] == null ? undefined : json['email'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'lastName': json['lastName'] == null ? undefined : json['lastName'],
+        'location': json['location'] == null ? undefined : json['location'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'birthDay': json['birthDay'] == null ? undefined : (new Date(json['birthDay'])),
+        'guia': json['guia'] == null ? undefined : json['guia'],
+        'age': json['age'] == null ? undefined : json['age'],
+    };
 }
 
 export function UserOutToJSON(json: any): UserOut {
-  return UserOutToJSONTyped(json, false)
+    return UserOutToJSONTyped(json, false);
 }
 
-export function UserOutToJSONTyped(
-  value?: UserOut | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function UserOutToJSONTyped(value?: UserOut | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    userId: value['userId'],
-    email: value['email'],
-    name: value['name'],
-    lastName: value['lastName'],
-    location: value['location'],
-    description: value['description'],
-    birthDay:
-      value['birthDay'] == null ? undefined : value['birthDay'].toISOString().substring(0, 10),
-    plan: value['plan'],
-    guia: value['guia'],
-    age: value['age'],
-  }
+    return {
+        
+        'userId': value['userId'],
+        'email': value['email'],
+        'name': value['name'],
+        'lastName': value['lastName'],
+        'location': value['location'],
+        'description': value['description'],
+        'birthDay': value['birthDay'] == null ? undefined : ((value['birthDay']).toISOString().substring(0,10)),
+        'guia': value['guia'],
+        'age': value['age'],
+    };
 }
+

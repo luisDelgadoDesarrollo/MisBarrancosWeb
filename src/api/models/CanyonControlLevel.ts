@@ -12,81 +12,78 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface CanyonControlLevel
  */
 export interface CanyonControlLevel {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonControlLevel
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonControlLevel
-   */
-  caudalLevel?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonControlLevel
-   */
-  name?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonControlLevel
-   */
-  controlPoint?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonControlLevel
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonControlLevel
+     */
+    caudalLevel?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonControlLevel
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonControlLevel
+     */
+    controlPoint?: string;
 }
 
 /**
  * Check if a given object implements the CanyonControlLevel interface.
  */
 export function instanceOfCanyonControlLevel(value: object): value is CanyonControlLevel {
-  return true
+    return true;
 }
 
 export function CanyonControlLevelFromJSON(json: any): CanyonControlLevel {
-  return CanyonControlLevelFromJSONTyped(json, false)
+    return CanyonControlLevelFromJSONTyped(json, false);
 }
 
-export function CanyonControlLevelFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): CanyonControlLevel {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    caudalLevel: json['caudalLevel'] == null ? undefined : json['caudalLevel'],
-    name: json['name'] == null ? undefined : json['name'],
-    controlPoint: json['controlPoint'] == null ? undefined : json['controlPoint'],
-  }
+export function CanyonControlLevelFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonControlLevel {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'caudalLevel': json['caudalLevel'] == null ? undefined : json['caudalLevel'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'controlPoint': json['controlPoint'] == null ? undefined : json['controlPoint'],
+    };
 }
 
 export function CanyonControlLevelToJSON(json: any): CanyonControlLevel {
-  return CanyonControlLevelToJSONTyped(json, false)
+    return CanyonControlLevelToJSONTyped(json, false);
 }
 
-export function CanyonControlLevelToJSONTyped(
-  value?: CanyonControlLevel | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonControlLevelToJSONTyped(value?: CanyonControlLevel | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonId: value['canyonId'],
-    caudalLevel: value['caudalLevel'],
-    name: value['name'],
-    controlPoint: value['controlPoint'],
-  }
+    return {
+        
+        'canyonId': value['canyonId'],
+        'caudalLevel': value['caudalLevel'],
+        'name': value['name'],
+        'controlPoint': value['controlPoint'],
+    };
 }
+

@@ -12,102 +12,94 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface CanyonDescent
  */
 export interface CanyonDescent {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonDescent
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonDescent
-   */
-  descentNumber?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonDescent
-   */
-  length?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonDescent
-   */
-  slope?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonDescent
-   */
-  rapelNum?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonDescent
-   */
-  maxLength?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonDescent
-   */
-  equipment?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonDescent
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonDescent
+     */
+    length?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonDescent
+     */
+    slope?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonDescent
+     */
+    rapelNum?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonDescent
+     */
+    maxLength?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonDescent
+     */
+    equipment?: string;
 }
 
 /**
  * Check if a given object implements the CanyonDescent interface.
  */
 export function instanceOfCanyonDescent(value: object): value is CanyonDescent {
-  return true
+    return true;
 }
 
 export function CanyonDescentFromJSON(json: any): CanyonDescent {
-  return CanyonDescentFromJSONTyped(json, false)
+    return CanyonDescentFromJSONTyped(json, false);
 }
 
 export function CanyonDescentFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonDescent {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    descentNumber: json['descentNumber'] == null ? undefined : json['descentNumber'],
-    length: json['length'] == null ? undefined : json['length'],
-    slope: json['slope'] == null ? undefined : json['slope'],
-    rapelNum: json['rapelNum'] == null ? undefined : json['rapelNum'],
-    maxLength: json['maxLength'] == null ? undefined : json['maxLength'],
-    equipment: json['equipment'] == null ? undefined : json['equipment'],
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'length': json['length'] == null ? undefined : json['length'],
+        'slope': json['slope'] == null ? undefined : json['slope'],
+        'rapelNum': json['rapelNum'] == null ? undefined : json['rapelNum'],
+        'maxLength': json['maxLength'] == null ? undefined : json['maxLength'],
+        'equipment': json['equipment'] == null ? undefined : json['equipment'],
+    };
 }
 
 export function CanyonDescentToJSON(json: any): CanyonDescent {
-  return CanyonDescentToJSONTyped(json, false)
+    return CanyonDescentToJSONTyped(json, false);
 }
 
-export function CanyonDescentToJSONTyped(
-  value?: CanyonDescent | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonDescentToJSONTyped(value?: CanyonDescent | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonId: value['canyonId'],
-    descentNumber: value['descentNumber'],
-    length: value['length'],
-    slope: value['slope'],
-    rapelNum: value['rapelNum'],
-    maxLength: value['maxLength'],
-    equipment: value['equipment'],
-  }
+    return {
+        
+        'canyonId': value['canyonId'],
+        'length': value['length'],
+        'slope': value['slope'],
+        'rapelNum': value['rapelNum'],
+        'maxLength': value['maxLength'],
+        'equipment': value['equipment'],
+    };
 }
+

@@ -12,78 +12,78 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface CanyonLink
  */
 export interface CanyonLink {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonLink
-   */
-  canyonLinkId?: number
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonLink
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonLink
-   */
-  link?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonLink
-   */
-  title?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonLink
+     */
+    canyonLinkId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonLink
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonLink
+     */
+    link?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonLink
+     */
+    title?: string;
 }
 
 /**
  * Check if a given object implements the CanyonLink interface.
  */
 export function instanceOfCanyonLink(value: object): value is CanyonLink {
-  return true
+    return true;
 }
 
 export function CanyonLinkFromJSON(json: any): CanyonLink {
-  return CanyonLinkFromJSONTyped(json, false)
+    return CanyonLinkFromJSONTyped(json, false);
 }
 
 export function CanyonLinkFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonLink {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonLinkId: json['canyonLinkId'] == null ? undefined : json['canyonLinkId'],
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    link: json['link'] == null ? undefined : json['link'],
-    title: json['title'] == null ? undefined : json['title'],
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonLinkId': json['canyonLinkId'] == null ? undefined : json['canyonLinkId'],
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'link': json['link'] == null ? undefined : json['link'],
+        'title': json['title'] == null ? undefined : json['title'],
+    };
 }
 
 export function CanyonLinkToJSON(json: any): CanyonLink {
-  return CanyonLinkToJSONTyped(json, false)
+    return CanyonLinkToJSONTyped(json, false);
 }
 
-export function CanyonLinkToJSONTyped(
-  value?: CanyonLink | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonLinkToJSONTyped(value?: CanyonLink | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonLinkId: value['canyonLinkId'],
-    canyonId: value['canyonId'],
-    link: value['link'],
-    title: value['title'],
-  }
+    return {
+        
+        'canyonLinkId': value['canyonLinkId'],
+        'canyonId': value['canyonId'],
+        'link': value['link'],
+        'title': value['title'],
+    };
 }
+

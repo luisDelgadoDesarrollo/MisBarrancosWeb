@@ -12,103 +12,102 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface SimpleUser
  */
 export interface SimpleUser {
-  /**
-   *
-   * @type {number}
-   * @memberof SimpleUser
-   */
-  userId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleUser
-   */
-  email?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleUser
-   */
-  name?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleUser
-   */
-  lastName?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleUser
-   */
-  location?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleUser
-   */
-  description?: string
-  /**
-   *
-   * @type {Date}
-   * @memberof SimpleUser
-   */
-  birthDay?: Date
+    /**
+     * 
+     * @type {number}
+     * @memberof SimpleUser
+     */
+    userId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleUser
+     */
+    email?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleUser
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleUser
+     */
+    lastName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleUser
+     */
+    location?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleUser
+     */
+    description?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof SimpleUser
+     */
+    birthDay?: Date;
 }
 
 /**
  * Check if a given object implements the SimpleUser interface.
  */
 export function instanceOfSimpleUser(value: object): value is SimpleUser {
-  return true
+    return true;
 }
 
 export function SimpleUserFromJSON(json: any): SimpleUser {
-  return SimpleUserFromJSONTyped(json, false)
+    return SimpleUserFromJSONTyped(json, false);
 }
 
 export function SimpleUserFromJSONTyped(json: any, ignoreDiscriminator: boolean): SimpleUser {
-  if (json == null) {
-    return json
-  }
-  return {
-    userId: json['userId'] == null ? undefined : json['userId'],
-    email: json['email'] == null ? undefined : json['email'],
-    name: json['name'] == null ? undefined : json['name'],
-    lastName: json['lastName'] == null ? undefined : json['lastName'],
-    location: json['location'] == null ? undefined : json['location'],
-    description: json['description'] == null ? undefined : json['description'],
-    birthDay: json['birthDay'] == null ? undefined : new Date(json['birthDay']),
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'userId': json['userId'] == null ? undefined : json['userId'],
+        'email': json['email'] == null ? undefined : json['email'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'lastName': json['lastName'] == null ? undefined : json['lastName'],
+        'location': json['location'] == null ? undefined : json['location'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'birthDay': json['birthDay'] == null ? undefined : (new Date(json['birthDay'])),
+    };
 }
 
 export function SimpleUserToJSON(json: any): SimpleUser {
-  return SimpleUserToJSONTyped(json, false)
+    return SimpleUserToJSONTyped(json, false);
 }
 
-export function SimpleUserToJSONTyped(
-  value?: SimpleUser | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function SimpleUserToJSONTyped(value?: SimpleUser | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    userId: value['userId'],
-    email: value['email'],
-    name: value['name'],
-    lastName: value['lastName'],
-    location: value['location'],
-    description: value['description'],
-    birthDay:
-      value['birthDay'] == null ? undefined : value['birthDay'].toISOString().substring(0, 10),
-  }
+    return {
+        
+        'userId': value['userId'],
+        'email': value['email'],
+        'name': value['name'],
+        'lastName': value['lastName'],
+        'location': value['location'],
+        'description': value['description'],
+        'birthDay': value['birthDay'] == null ? undefined : ((value['birthDay']).toISOString().substring(0,10)),
+    };
 }
+

@@ -12,296 +12,218 @@
  * Do not edit the class manually.
  */
 
-import * as runtime from '../runtime'
-import type { ActivityType, MessageIn, MessageOut } from '../models/index'
+
+import * as runtime from '../runtime';
+import type {
+  Message,
+  MessageOut,
+} from '../models/index';
 import {
-  ActivityTypeFromJSON,
-  ActivityTypeToJSON,
-  MessageInFromJSON,
-  MessageInToJSON,
-  MessageOutFromJSON,
-  MessageOutToJSON,
-} from '../models/index'
+    MessageFromJSON,
+    MessageToJSON,
+    MessageOutFromJSON,
+    MessageOutToJSON,
+} from '../models/index';
 
 export interface DeleteMessageRequest {
-  messageId: number
-  activityType: ActivityType
+    messageId: number;
 }
 
 export interface GetMessagesRequest {
-  activityType: ActivityType
-  activityId: number
-  page?: number
-  size?: number
-  sort?: string
+    canyonId: number;
+    page?: number;
+    size?: number;
+    sort?: string;
 }
 
 export interface PostMessageRequest {
-  messageIn: MessageIn
+    message: Message;
 }
 
 export interface UpdateMessageRequest {
-  messageId: number
-  messageIn: MessageIn
+    messageId: number;
+    message: Message;
 }
 
 /**
- *
+ * 
  */
 export class MessageApi extends runtime.BaseAPI {
-  /**
-   * Delete a message
-   * Delete a message
-   */
-  async deleteMessageRaw(
-    requestParameters: DeleteMessageRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['messageId'] == null) {
-      throw new runtime.RequiredError(
-        'messageId',
-        'Required parameter "messageId" was null or undefined when calling deleteMessage().',
-      )
+
+    /**
+     * Delete a message
+     * Delete a message
+     */
+    async deleteMessageRaw(requestParameters: DeleteMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['messageId'] == null) {
+            throw new runtime.RequiredError(
+                'messageId',
+                'Required parameter "messageId" was null or undefined when calling deleteMessage().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/message/{messageId}`.replace(`{${"messageId"}}`, encodeURIComponent(String(requestParameters['messageId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
     }
 
-    if (requestParameters['activityType'] == null) {
-      throw new runtime.RequiredError(
-        'activityType',
-        'Required parameter "activityType" was null or undefined when calling deleteMessage().',
-      )
+    /**
+     * Delete a message
+     * Delete a message
+     */
+    async deleteMessage(requestParameters: DeleteMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteMessageRaw(requestParameters, initOverrides);
     }
 
-    const queryParameters: any = {}
+    /**
+     * Get all message about a canyon
+     * Get all message about a canyon
+     */
+    async getMessagesRaw(requestParameters: GetMessagesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MessageOut>>> {
+        if (requestParameters['canyonId'] == null) {
+            throw new runtime.RequiredError(
+                'canyonId',
+                'Required parameter "canyonId" was null or undefined when calling getMessages().'
+            );
+        }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+        const queryParameters: any = {};
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/message/{messageId}/activityType/{activityType}`
-          .replace(`{${'messageId'}}`, encodeURIComponent(String(requestParameters['messageId'])))
-          .replace(
-            `{${'activityType'}}`,
-            encodeURIComponent(String(requestParameters['activityType'])),
-          ),
-        method: 'DELETE',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
 
-    return new runtime.VoidApiResponse(response)
-  }
+        if (requestParameters['size'] != null) {
+            queryParameters['size'] = requestParameters['size'];
+        }
 
-  /**
-   * Delete a message
-   * Delete a message
-   */
-  async deleteMessage(
-    requestParameters: DeleteMessageRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.deleteMessageRaw(requestParameters, initOverrides)
-  }
+        if (requestParameters['sort'] != null) {
+            queryParameters['sort'] = requestParameters['sort'];
+        }
 
-  /**
-   * Get all message about an activity
-   * Get all message about an activity
-   */
-  async getMessagesRaw(
-    requestParameters: GetMessagesRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Array<MessageOut>>> {
-    if (requestParameters['activityType'] == null) {
-      throw new runtime.RequiredError(
-        'activityType',
-        'Required parameter "activityType" was null or undefined when calling getMessages().',
-      )
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/messages/{canyonId}`.replace(`{${"canyonId"}}`, encodeURIComponent(String(requestParameters['canyonId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MessageOutFromJSON));
     }
 
-    if (requestParameters['activityId'] == null) {
-      throw new runtime.RequiredError(
-        'activityId',
-        'Required parameter "activityId" was null or undefined when calling getMessages().',
-      )
+    /**
+     * Get all message about a canyon
+     * Get all message about a canyon
+     */
+    async getMessages(requestParameters: GetMessagesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<MessageOut>> {
+        const response = await this.getMessagesRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    const queryParameters: any = {}
+    /**
+     * Post a new message
+     * Post a new message
+     */
+    async postMessageRaw(requestParameters: PostMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MessageOut>> {
+        if (requestParameters['message'] == null) {
+            throw new runtime.RequiredError(
+                'message',
+                'Required parameter "message" was null or undefined when calling postMessage().'
+            );
+        }
 
-    if (requestParameters['page'] != null) {
-      queryParameters['page'] = requestParameters['page']
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/messages`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: MessageToJSON(requestParameters['message']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MessageOutFromJSON(jsonValue));
     }
 
-    if (requestParameters['size'] != null) {
-      queryParameters['size'] = requestParameters['size']
+    /**
+     * Post a new message
+     * Post a new message
+     */
+    async postMessage(requestParameters: PostMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MessageOut> {
+        const response = await this.postMessageRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['sort'] != null) {
-      queryParameters['sort'] = requestParameters['sort']
+    /**
+     * Update a message
+     * Update a meesage
+     */
+    async updateMessageRaw(requestParameters: UpdateMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MessageOut>> {
+        if (requestParameters['messageId'] == null) {
+            throw new runtime.RequiredError(
+                'messageId',
+                'Required parameter "messageId" was null or undefined when calling updateMessage().'
+            );
+        }
+
+        if (requestParameters['message'] == null) {
+            throw new runtime.RequiredError(
+                'message',
+                'Required parameter "message" was null or undefined when calling updateMessage().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/messages/{messageId}`.replace(`{${"messageId"}}`, encodeURIComponent(String(requestParameters['messageId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: MessageToJSON(requestParameters['message']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MessageOutFromJSON(jsonValue));
     }
 
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/messages/{activityType}/activity/{activityId}`
-          .replace(
-            `{${'activityType'}}`,
-            encodeURIComponent(String(requestParameters['activityType'])),
-          )
-          .replace(
-            `{${'activityId'}}`,
-            encodeURIComponent(String(requestParameters['activityId'])),
-          ),
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MessageOutFromJSON))
-  }
-
-  /**
-   * Get all message about an activity
-   * Get all message about an activity
-   */
-  async getMessages(
-    requestParameters: GetMessagesRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Array<MessageOut>> {
-    const response = await this.getMessagesRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Post a new message
-   * Post a new message
-   */
-  async postMessageRaw(
-    requestParameters: PostMessageRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['messageIn'] == null) {
-      throw new runtime.RequiredError(
-        'messageIn',
-        'Required parameter "messageIn" was null or undefined when calling postMessage().',
-      )
+    /**
+     * Update a message
+     * Update a meesage
+     */
+    async updateMessage(requestParameters: UpdateMessageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MessageOut> {
+        const response = await this.updateMessageRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/messages`,
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-        body: MessageInToJSON(requestParameters['messageIn']),
-      },
-      initOverrides,
-    )
-
-    return new runtime.VoidApiResponse(response)
-  }
-
-  /**
-   * Post a new message
-   * Post a new message
-   */
-  async postMessage(
-    requestParameters: PostMessageRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.postMessageRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * Update a message
-   * Update a meesage
-   */
-  async updateMessageRaw(
-    requestParameters: UpdateMessageRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['messageId'] == null) {
-      throw new runtime.RequiredError(
-        'messageId',
-        'Required parameter "messageId" was null or undefined when calling updateMessage().',
-      )
-    }
-
-    if (requestParameters['messageIn'] == null) {
-      throw new runtime.RequiredError(
-        'messageIn',
-        'Required parameter "messageIn" was null or undefined when calling updateMessage().',
-      )
-    }
-
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/messages/{messageId}`.replace(
-          `{${'messageId'}}`,
-          encodeURIComponent(String(requestParameters['messageId'])),
-        ),
-        method: 'PUT',
-        headers: headerParameters,
-        query: queryParameters,
-        body: MessageInToJSON(requestParameters['messageIn']),
-      },
-      initOverrides,
-    )
-
-    return new runtime.VoidApiResponse(response)
-  }
-
-  /**
-   * Update a message
-   * Update a meesage
-   */
-  async updateMessage(
-    requestParameters: UpdateMessageRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.updateMessageRaw(requestParameters, initOverrides)
-  }
 }

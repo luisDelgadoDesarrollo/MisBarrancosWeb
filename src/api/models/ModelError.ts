@@ -12,70 +12,70 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface ModelError
  */
 export interface ModelError {
-  /**
-   *
-   * @type {string}
-   * @memberof ModelError
-   */
-  errorCode?: string
-  /**
-   *
-   * @type {string}
-   * @memberof ModelError
-   */
-  description?: string
-  /**
-   *
-   * @type {string}
-   * @memberof ModelError
-   */
-  cause?: string
+    /**
+     * 
+     * @type {string}
+     * @memberof ModelError
+     */
+    errorCode?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ModelError
+     */
+    description?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ModelError
+     */
+    cause?: string;
 }
 
 /**
  * Check if a given object implements the ModelError interface.
  */
 export function instanceOfModelError(value: object): value is ModelError {
-  return true
+    return true;
 }
 
 export function ModelErrorFromJSON(json: any): ModelError {
-  return ModelErrorFromJSONTyped(json, false)
+    return ModelErrorFromJSONTyped(json, false);
 }
 
 export function ModelErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): ModelError {
-  if (json == null) {
-    return json
-  }
-  return {
-    errorCode: json['errorCode'] == null ? undefined : json['errorCode'],
-    description: json['description'] == null ? undefined : json['description'],
-    cause: json['cause'] == null ? undefined : json['cause'],
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'errorCode': json['errorCode'] == null ? undefined : json['errorCode'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'cause': json['cause'] == null ? undefined : json['cause'],
+    };
 }
 
 export function ModelErrorToJSON(json: any): ModelError {
-  return ModelErrorToJSONTyped(json, false)
+    return ModelErrorToJSONTyped(json, false);
 }
 
-export function ModelErrorToJSONTyped(
-  value?: ModelError | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function ModelErrorToJSONTyped(value?: ModelError | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    errorCode: value['errorCode'],
-    description: value['description'],
-    cause: value['cause'],
-  }
+    return {
+        
+        'errorCode': value['errorCode'],
+        'description': value['description'],
+        'cause': value['cause'],
+    };
 }
+

@@ -12,65 +12,62 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface CanyonCanyonNear
  */
 export interface CanyonCanyonNear {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonCanyonNear
-   */
-  principalCanyon?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonCanyonNear
-   */
-  nearCanyon?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonCanyonNear
+     */
+    principalCanyon?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonCanyonNear
+     */
+    nearCanyon?: string;
 }
 
 /**
  * Check if a given object implements the CanyonCanyonNear interface.
  */
 export function instanceOfCanyonCanyonNear(value: object): value is CanyonCanyonNear {
-  return true
+    return true;
 }
 
 export function CanyonCanyonNearFromJSON(json: any): CanyonCanyonNear {
-  return CanyonCanyonNearFromJSONTyped(json, false)
+    return CanyonCanyonNearFromJSONTyped(json, false);
 }
 
-export function CanyonCanyonNearFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): CanyonCanyonNear {
-  if (json == null) {
-    return json
-  }
-  return {
-    principalCanyon: json['principalCanyon'] == null ? undefined : json['principalCanyon'],
-    nearCanyon: json['nearCanyon'] == null ? undefined : json['nearCanyon'],
-  }
+export function CanyonCanyonNearFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonCanyonNear {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'principalCanyon': json['principalCanyon'] == null ? undefined : json['principalCanyon'],
+        'nearCanyon': json['nearCanyon'] == null ? undefined : json['nearCanyon'],
+    };
 }
 
 export function CanyonCanyonNearToJSON(json: any): CanyonCanyonNear {
-  return CanyonCanyonNearToJSONTyped(json, false)
+    return CanyonCanyonNearToJSONTyped(json, false);
 }
 
-export function CanyonCanyonNearToJSONTyped(
-  value?: CanyonCanyonNear | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonCanyonNearToJSONTyped(value?: CanyonCanyonNear | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    principalCanyon: value['principalCanyon'],
-    nearCanyon: value['nearCanyon'],
-  }
+    return {
+        
+        'principalCanyon': value['principalCanyon'],
+        'nearCanyon': value['nearCanyon'],
+    };
 }
+

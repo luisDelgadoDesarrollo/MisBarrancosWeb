@@ -12,74 +12,70 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface CanyonProhibition
  */
 export interface CanyonProhibition {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonProhibition
-   */
-  canyonProhibitionId?: number
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonProhibition
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonProhibition
-   */
-  description?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonProhibition
+     */
+    canyonProhibitionId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonProhibition
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonProhibition
+     */
+    description?: string;
 }
 
 /**
  * Check if a given object implements the CanyonProhibition interface.
  */
 export function instanceOfCanyonProhibition(value: object): value is CanyonProhibition {
-  return true
+    return true;
 }
 
 export function CanyonProhibitionFromJSON(json: any): CanyonProhibition {
-  return CanyonProhibitionFromJSONTyped(json, false)
+    return CanyonProhibitionFromJSONTyped(json, false);
 }
 
-export function CanyonProhibitionFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): CanyonProhibition {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonProhibitionId:
-      json['canyonProhibitionId'] == null ? undefined : json['canyonProhibitionId'],
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    description: json['description'] == null ? undefined : json['description'],
-  }
+export function CanyonProhibitionFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonProhibition {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonProhibitionId': json['canyonProhibitionId'] == null ? undefined : json['canyonProhibitionId'],
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'description': json['description'] == null ? undefined : json['description'],
+    };
 }
 
 export function CanyonProhibitionToJSON(json: any): CanyonProhibition {
-  return CanyonProhibitionToJSONTyped(json, false)
+    return CanyonProhibitionToJSONTyped(json, false);
 }
 
-export function CanyonProhibitionToJSONTyped(
-  value?: CanyonProhibition | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonProhibitionToJSONTyped(value?: CanyonProhibition | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonProhibitionId: value['canyonProhibitionId'],
-    canyonId: value['canyonId'],
-    description: value['description'],
-  }
+    return {
+        
+        'canyonProhibitionId': value['canyonProhibitionId'],
+        'canyonId': value['canyonId'],
+        'description': value['description'],
+    };
 }
+

@@ -12,94 +12,94 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface SimpleCanyon
  */
 export interface SimpleCanyon {
-  /**
-   *
-   * @type {number}
-   * @memberof SimpleCanyon
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleCanyon
-   */
-  name?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleCanyon
-   */
-  season?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleCanyon
-   */
-  river?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleCanyon
-   */
-  population?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleCanyon
-   */
-  country?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof SimpleCanyon
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleCanyon
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleCanyon
+     */
+    season?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleCanyon
+     */
+    river?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleCanyon
+     */
+    population?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleCanyon
+     */
+    country?: string;
 }
 
 /**
  * Check if a given object implements the SimpleCanyon interface.
  */
 export function instanceOfSimpleCanyon(value: object): value is SimpleCanyon {
-  return true
+    return true;
 }
 
 export function SimpleCanyonFromJSON(json: any): SimpleCanyon {
-  return SimpleCanyonFromJSONTyped(json, false)
+    return SimpleCanyonFromJSONTyped(json, false);
 }
 
 export function SimpleCanyonFromJSONTyped(json: any, ignoreDiscriminator: boolean): SimpleCanyon {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    name: json['name'] == null ? undefined : json['name'],
-    season: json['season'] == null ? undefined : json['season'],
-    river: json['river'] == null ? undefined : json['river'],
-    population: json['population'] == null ? undefined : json['population'],
-    country: json['country'] == null ? undefined : json['country'],
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'season': json['season'] == null ? undefined : json['season'],
+        'river': json['river'] == null ? undefined : json['river'],
+        'population': json['population'] == null ? undefined : json['population'],
+        'country': json['country'] == null ? undefined : json['country'],
+    };
 }
 
 export function SimpleCanyonToJSON(json: any): SimpleCanyon {
-  return SimpleCanyonToJSONTyped(json, false)
+    return SimpleCanyonToJSONTyped(json, false);
 }
 
-export function SimpleCanyonToJSONTyped(
-  value?: SimpleCanyon | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function SimpleCanyonToJSONTyped(value?: SimpleCanyon | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonId: value['canyonId'],
-    name: value['name'],
-    season: value['season'],
-    river: value['river'],
-    population: value['population'],
-    country: value['country'],
-  }
+    return {
+        
+        'canyonId': value['canyonId'],
+        'name': value['name'],
+        'season': value['season'],
+        'river': value['river'],
+        'population': value['population'],
+        'country': value['country'],
+    };
 }
+

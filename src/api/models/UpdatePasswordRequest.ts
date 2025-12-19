@@ -12,57 +12,54 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface UpdatePasswordRequest
  */
 export interface UpdatePasswordRequest {
-  /**
-   *
-   * @type {string}
-   * @memberof UpdatePasswordRequest
-   */
-  password?: string
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePasswordRequest
+     */
+    password?: string;
 }
 
 /**
  * Check if a given object implements the UpdatePasswordRequest interface.
  */
 export function instanceOfUpdatePasswordRequest(value: object): value is UpdatePasswordRequest {
-  return true
+    return true;
 }
 
 export function UpdatePasswordRequestFromJSON(json: any): UpdatePasswordRequest {
-  return UpdatePasswordRequestFromJSONTyped(json, false)
+    return UpdatePasswordRequestFromJSONTyped(json, false);
 }
 
-export function UpdatePasswordRequestFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): UpdatePasswordRequest {
-  if (json == null) {
-    return json
-  }
-  return {
-    password: json['password'] == null ? undefined : json['password'],
-  }
+export function UpdatePasswordRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdatePasswordRequest {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'password': json['password'] == null ? undefined : json['password'],
+    };
 }
 
 export function UpdatePasswordRequestToJSON(json: any): UpdatePasswordRequest {
-  return UpdatePasswordRequestToJSONTyped(json, false)
+    return UpdatePasswordRequestToJSONTyped(json, false);
 }
 
-export function UpdatePasswordRequestToJSONTyped(
-  value?: UpdatePasswordRequest | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function UpdatePasswordRequestToJSONTyped(value?: UpdatePasswordRequest | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    password: value['password'],
-  }
+    return {
+        
+        'password': value['password'],
+    };
 }
+

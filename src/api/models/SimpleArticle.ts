@@ -12,102 +12,102 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface SimpleArticle
  */
 export interface SimpleArticle {
-  /**
-   *
-   * @type {number}
-   * @memberof SimpleArticle
-   */
-  articleId?: number
-  /**
-   *
-   * @type {number}
-   * @memberof SimpleArticle
-   */
-  articleType?: number
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleArticle
-   */
-  organizer?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleArticle
-   */
-  location?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleArticle
-   */
-  title?: string
-  /**
-   *
-   * @type {string}
-   * @memberof SimpleArticle
-   */
-  description?: string
-  /**
-   *
-   * @type {Date}
-   * @memberof SimpleArticle
-   */
-  articleDate?: Date
+    /**
+     * 
+     * @type {number}
+     * @memberof SimpleArticle
+     */
+    articleId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SimpleArticle
+     */
+    articleType?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleArticle
+     */
+    organizer?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleArticle
+     */
+    location?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleArticle
+     */
+    title?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleArticle
+     */
+    description?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof SimpleArticle
+     */
+    articleDate?: Date;
 }
 
 /**
  * Check if a given object implements the SimpleArticle interface.
  */
 export function instanceOfSimpleArticle(value: object): value is SimpleArticle {
-  return true
+    return true;
 }
 
 export function SimpleArticleFromJSON(json: any): SimpleArticle {
-  return SimpleArticleFromJSONTyped(json, false)
+    return SimpleArticleFromJSONTyped(json, false);
 }
 
 export function SimpleArticleFromJSONTyped(json: any, ignoreDiscriminator: boolean): SimpleArticle {
-  if (json == null) {
-    return json
-  }
-  return {
-    articleId: json['articleId'] == null ? undefined : json['articleId'],
-    articleType: json['articleType'] == null ? undefined : json['articleType'],
-    organizer: json['organizer'] == null ? undefined : json['organizer'],
-    location: json['location'] == null ? undefined : json['location'],
-    title: json['title'] == null ? undefined : json['title'],
-    description: json['description'] == null ? undefined : json['description'],
-    articleDate: json['articleDate'] == null ? undefined : new Date(json['articleDate']),
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'articleId': json['articleId'] == null ? undefined : json['articleId'],
+        'articleType': json['articleType'] == null ? undefined : json['articleType'],
+        'organizer': json['organizer'] == null ? undefined : json['organizer'],
+        'location': json['location'] == null ? undefined : json['location'],
+        'title': json['title'] == null ? undefined : json['title'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'articleDate': json['articleDate'] == null ? undefined : (new Date(json['articleDate'])),
+    };
 }
 
 export function SimpleArticleToJSON(json: any): SimpleArticle {
-  return SimpleArticleToJSONTyped(json, false)
+    return SimpleArticleToJSONTyped(json, false);
 }
 
-export function SimpleArticleToJSONTyped(
-  value?: SimpleArticle | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function SimpleArticleToJSONTyped(value?: SimpleArticle | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    articleId: value['articleId'],
-    articleType: value['articleType'],
-    organizer: value['organizer'],
-    location: value['location'],
-    title: value['title'],
-    description: value['description'],
-    articleDate: value['articleDate'] == null ? undefined : value['articleDate'].toISOString(),
-  }
+    return {
+        
+        'articleId': value['articleId'],
+        'articleType': value['articleType'],
+        'organizer': value['organizer'],
+        'location': value['location'],
+        'title': value['title'],
+        'description': value['description'],
+        'articleDate': value['articleDate'] == null ? undefined : ((value['articleDate']).toISOString()),
+    };
 }
+

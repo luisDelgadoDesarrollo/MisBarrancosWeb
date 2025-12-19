@@ -1,7 +1,7 @@
 <template>
   <v-file-input
     clearable
-    label="Foto de perfil"
+    :label="props.label || 'Foto de perfil'"
     accept="image/*"
     v-model="model"
     :readonly="props.readonly"
@@ -17,6 +17,7 @@ import { ref, watch } from 'vue'
 
 const model = defineModel<File | null>()
 const props = defineProps<{
+  label?: string
   readonly?: boolean
 }>()
 

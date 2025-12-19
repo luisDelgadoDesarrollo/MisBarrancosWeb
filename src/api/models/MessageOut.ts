@@ -12,110 +12,110 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
-import type { SimpleUser } from './SimpleUser'
+import { mapValues } from '../runtime';
+import type { SimpleUser } from './SimpleUser';
 import {
-  SimpleUserFromJSON,
-  SimpleUserFromJSONTyped,
-  SimpleUserToJSON,
-  SimpleUserToJSONTyped,
-} from './SimpleUser'
+    SimpleUserFromJSON,
+    SimpleUserFromJSONTyped,
+    SimpleUserToJSON,
+    SimpleUserToJSONTyped,
+} from './SimpleUser';
 
 /**
- *
+ * 
  * @export
  * @interface MessageOut
  */
 export interface MessageOut {
-  /**
-   *
-   * @type {number}
-   * @memberof MessageOut
-   */
-  messageId?: number
-  /**
-   *
-   * @type {number}
-   * @memberof MessageOut
-   */
-  placeId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof MessageOut
-   */
-  message?: string
-  /**
-   *
-   * @type {Date}
-   * @memberof MessageOut
-   */
-  date?: Date
-  /**
-   *
-   * @type {number}
-   * @memberof MessageOut
-   */
-  flow?: number
-  /**
-   *
-   * @type {number}
-   * @memberof MessageOut
-   */
-  temperature?: number
-  /**
-   *
-   * @type {SimpleUser}
-   * @memberof MessageOut
-   */
-  user?: SimpleUser
+    /**
+     * 
+     * @type {number}
+     * @memberof MessageOut
+     */
+    messageId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof MessageOut
+     */
+    placeId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof MessageOut
+     */
+    message?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof MessageOut
+     */
+    date?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof MessageOut
+     */
+    flow?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof MessageOut
+     */
+    temperature?: number;
+    /**
+     * 
+     * @type {SimpleUser}
+     * @memberof MessageOut
+     */
+    user?: SimpleUser;
 }
 
 /**
  * Check if a given object implements the MessageOut interface.
  */
 export function instanceOfMessageOut(value: object): value is MessageOut {
-  return true
+    return true;
 }
 
 export function MessageOutFromJSON(json: any): MessageOut {
-  return MessageOutFromJSONTyped(json, false)
+    return MessageOutFromJSONTyped(json, false);
 }
 
 export function MessageOutFromJSONTyped(json: any, ignoreDiscriminator: boolean): MessageOut {
-  if (json == null) {
-    return json
-  }
-  return {
-    messageId: json['messageId'] == null ? undefined : json['messageId'],
-    placeId: json['placeId'] == null ? undefined : json['placeId'],
-    message: json['message'] == null ? undefined : json['message'],
-    date: json['date'] == null ? undefined : new Date(json['date']),
-    flow: json['flow'] == null ? undefined : json['flow'],
-    temperature: json['temperature'] == null ? undefined : json['temperature'],
-    user: json['user'] == null ? undefined : SimpleUserFromJSON(json['user']),
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'messageId': json['messageId'] == null ? undefined : json['messageId'],
+        'placeId': json['placeId'] == null ? undefined : json['placeId'],
+        'message': json['message'] == null ? undefined : json['message'],
+        'date': json['date'] == null ? undefined : (new Date(json['date'])),
+        'flow': json['flow'] == null ? undefined : json['flow'],
+        'temperature': json['temperature'] == null ? undefined : json['temperature'],
+        'user': json['user'] == null ? undefined : SimpleUserFromJSON(json['user']),
+    };
 }
 
 export function MessageOutToJSON(json: any): MessageOut {
-  return MessageOutToJSONTyped(json, false)
+    return MessageOutToJSONTyped(json, false);
 }
 
-export function MessageOutToJSONTyped(
-  value?: MessageOut | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function MessageOutToJSONTyped(value?: MessageOut | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    messageId: value['messageId'],
-    placeId: value['placeId'],
-    message: value['message'],
-    date: value['date'] == null ? undefined : value['date'].toISOString().substring(0, 10),
-    flow: value['flow'],
-    temperature: value['temperature'],
-    user: SimpleUserToJSON(value['user']),
-  }
+    return {
+        
+        'messageId': value['messageId'],
+        'placeId': value['placeId'],
+        'message': value['message'],
+        'date': value['date'] == null ? undefined : ((value['date']).toISOString().substring(0,10)),
+        'flow': value['flow'],
+        'temperature': value['temperature'],
+        'user': SimpleUserToJSON(value['user']),
+    };
 }
+

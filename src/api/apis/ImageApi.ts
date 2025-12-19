@@ -12,162 +12,141 @@
  * Do not edit the class manually.
  */
 
-import * as runtime from '../runtime'
-import type { ImagesImageDirGet404Response } from '../models/index'
+
+import * as runtime from '../runtime';
+import type {
+  ImagesImageDirGet404Response,
+} from '../models/index';
 import {
-  ImagesImageDirGet404ResponseFromJSON,
-  ImagesImageDirGet404ResponseToJSON,
-} from '../models/index'
+    ImagesImageDirGet404ResponseFromJSON,
+    ImagesImageDirGet404ResponseToJSON,
+} from '../models/index';
 
 export interface ImagesImageDirGetRequest {
-  image: string
-  dir: string
+    image: string;
+    dir: string;
 }
 
 export interface PostImageRequest {
-  file: Blob
-  name?: string
-  dir?: string
+    file: Blob;
+    name?: string;
+    dir?: string;
 }
 
 /**
- *
+ * 
  */
 export class ImageApi extends runtime.BaseAPI {
-  /**
-   * Recupera una imagen desde el servidor utilizando su ID
-   * Obtener una imagen por su nombre
-   */
-  async imagesImageDirGetRaw(
-    requestParameters: ImagesImageDirGetRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Blob>> {
-    if (requestParameters['image'] == null) {
-      throw new runtime.RequiredError(
-        'image',
-        'Required parameter "image" was null or undefined when calling imagesImageDirGet().',
-      )
+
+    /**
+     * Recupera una imagen desde el servidor utilizando su ID
+     * Obtener una imagen por su nombre
+     */
+    async imagesImageDirGetRaw(requestParameters: ImagesImageDirGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
+        if (requestParameters['image'] == null) {
+            throw new runtime.RequiredError(
+                'image',
+                'Required parameter "image" was null or undefined when calling imagesImageDirGet().'
+            );
+        }
+
+        if (requestParameters['dir'] == null) {
+            throw new runtime.RequiredError(
+                'dir',
+                'Required parameter "dir" was null or undefined when calling imagesImageDirGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/images/{image}/{dir}`.replace(`{${"image"}}`, encodeURIComponent(String(requestParameters['image']))).replace(`{${"dir"}}`, encodeURIComponent(String(requestParameters['dir']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.BlobApiResponse(response);
     }
 
-    if (requestParameters['dir'] == null) {
-      throw new runtime.RequiredError(
-        'dir',
-        'Required parameter "dir" was null or undefined when calling imagesImageDirGet().',
-      )
+    /**
+     * Recupera una imagen desde el servidor utilizando su ID
+     * Obtener una imagen por su nombre
+     */
+    async imagesImageDirGet(requestParameters: ImagesImageDirGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
+        const response = await this.imagesImageDirGetRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    const queryParameters: any = {}
+    /**
+     * Post an image
+     * Post an image
+     */
+    async postImageRaw(requestParameters: PostImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['file'] == null) {
+            throw new runtime.RequiredError(
+                'file',
+                'Required parameter "file" was null or undefined when calling postImage().'
+            );
+        }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+        const queryParameters: any = {};
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/images/{image}/{dir}`
-          .replace(`{${'image'}}`, encodeURIComponent(String(requestParameters['image'])))
-          .replace(`{${'dir'}}`, encodeURIComponent(String(requestParameters['dir']))),
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        const headerParameters: runtime.HTTPHeaders = {};
 
-    return new runtime.BlobApiResponse(response)
-  }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const consumes: runtime.Consume[] = [
+            { contentType: 'multipart/form-data' },
+        ];
+        // @ts-ignore: canConsumeForm may be unused
+        const canConsumeForm = runtime.canConsumeForm(consumes);
 
-  /**
-   * Recupera una imagen desde el servidor utilizando su ID
-   * Obtener una imagen por su nombre
-   */
-  async imagesImageDirGet(
-    requestParameters: ImagesImageDirGetRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Blob> {
-    const response = await this.imagesImageDirGetRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
+        let formParams: { append(param: string, value: any): any };
+        let useForm = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new URLSearchParams();
+        }
 
-  /**
-   * Post an image
-   * Post an image
-   */
-  async postImageRaw(
-    requestParameters: PostImageRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['file'] == null) {
-      throw new runtime.RequiredError(
-        'file',
-        'Required parameter "file" was null or undefined when calling postImage().',
-      )
-    }
+        if (requestParameters['file'] != null) {
+            formParams.append('file', requestParameters['file'] as any);
+        }
 
-    const queryParameters: any = {}
+        if (requestParameters['name'] != null) {
+            formParams.append('name', requestParameters['name'] as any);
+        }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+        if (requestParameters['dir'] != null) {
+            formParams.append('dir', requestParameters['dir'] as any);
+        }
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const consumes: runtime.Consume[] = [{ contentType: 'multipart/form-data' }]
-    // @ts-ignore: canConsumeForm may be unused
-    const canConsumeForm = runtime.canConsumeForm(consumes)
+        const response = await this.request({
+            path: `/images`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: formParams,
+        }, initOverrides);
 
-    let formParams: { append(param: string, value: any): any }
-    let useForm = false
-    // use FormData to transmit files using content-type "multipart/form-data"
-    useForm = canConsumeForm
-    if (useForm) {
-      formParams = new FormData()
-    } else {
-      formParams = new URLSearchParams()
+        return new runtime.VoidApiResponse(response);
     }
 
-    if (requestParameters['file'] != null) {
-      formParams.append('file', requestParameters['file'] as any)
+    /**
+     * Post an image
+     * Post an image
+     */
+    async postImage(requestParameters: PostImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.postImageRaw(requestParameters, initOverrides);
     }
 
-    if (requestParameters['name'] != null) {
-      formParams.append('name', requestParameters['name'] as any)
-    }
-
-    if (requestParameters['dir'] != null) {
-      formParams.append('dir', requestParameters['dir'] as any)
-    }
-
-    const response = await this.request(
-      {
-        path: `/images`,
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-        body: formParams,
-      },
-      initOverrides,
-    )
-
-    return new runtime.VoidApiResponse(response)
-  }
-
-  /**
-   * Post an image
-   * Post an image
-   */
-  async postImage(
-    requestParameters: PostImageRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.postImageRaw(requestParameters, initOverrides)
-  }
 }

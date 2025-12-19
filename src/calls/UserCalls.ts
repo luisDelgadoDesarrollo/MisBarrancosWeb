@@ -1,5 +1,5 @@
-import { UserApi, type GetUserRequest, type UpdateUserRequest, type UserOut } from '@/api'
-import { withAuthHeaderApplicationJson } from './AuthApiUtils'
+import { UserApi, type GetUserRequest, type UpdatePasswordOperationRequest, type UpdateUserRequest, type UserOut } from '@/api'
+import { withAuthHeaderApplicationJson } from './ApiUtils'
 
 const userApi = new UserApi()
 
@@ -20,6 +20,17 @@ export async function upsateUserWithAuth(requestParameters: UpdateUserRequest) {
   })
   try {
     return await userApi.updateUser(requestParameters, initOverrides)
+  } catch (error) {
+    throw new Error(`Error updating user ${error}`)
+  }
+}
+
+export async function updatePassword(requestParameters: UpdatePasswordOperationRequest) {
+  const initOverrides = withAuthHeaderApplicationJson({
+    method: 'PUT',
+  })
+  try {
+    return await userApi.updatePassword(requestParameters, initOverrides)
   } catch (error) {
     throw new Error(`Error updating user ${error}`)
   }

@@ -12,350 +12,303 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
-import type { CanyonSchedule } from './CanyonSchedule'
+import { mapValues } from '../runtime';
+import type { CanyonSchedule } from './CanyonSchedule';
 import {
-  CanyonScheduleFromJSON,
-  CanyonScheduleFromJSONTyped,
-  CanyonScheduleToJSON,
-  CanyonScheduleToJSONTyped,
-} from './CanyonSchedule'
-import type { CanyonLink } from './CanyonLink'
+    CanyonScheduleFromJSON,
+    CanyonScheduleFromJSONTyped,
+    CanyonScheduleToJSON,
+    CanyonScheduleToJSONTyped,
+} from './CanyonSchedule';
+import type { CanyonLink } from './CanyonLink';
 import {
-  CanyonLinkFromJSON,
-  CanyonLinkFromJSONTyped,
-  CanyonLinkToJSON,
-  CanyonLinkToJSONTyped,
-} from './CanyonLink'
-import type { CanyonCanyonNear } from './CanyonCanyonNear'
+    CanyonLinkFromJSON,
+    CanyonLinkFromJSONTyped,
+    CanyonLinkToJSON,
+    CanyonLinkToJSONTyped,
+} from './CanyonLink';
+import type { CanyonDescent } from './CanyonDescent';
 import {
-  CanyonCanyonNearFromJSON,
-  CanyonCanyonNearFromJSONTyped,
-  CanyonCanyonNearToJSON,
-  CanyonCanyonNearToJSONTyped,
-} from './CanyonCanyonNear'
-import type { CanyonDescent } from './CanyonDescent'
+    CanyonDescentFromJSON,
+    CanyonDescentFromJSONTyped,
+    CanyonDescentToJSON,
+    CanyonDescentToJSONTyped,
+} from './CanyonDescent';
+import type { CanyonLocation } from './CanyonLocation';
 import {
-  CanyonDescentFromJSON,
-  CanyonDescentFromJSONTyped,
-  CanyonDescentToJSON,
-  CanyonDescentToJSONTyped,
-} from './CanyonDescent'
-import type { CanyonLocation } from './CanyonLocation'
+    CanyonLocationFromJSON,
+    CanyonLocationFromJSONTyped,
+    CanyonLocationToJSON,
+    CanyonLocationToJSONTyped,
+} from './CanyonLocation';
+import type { CanyonProhibition } from './CanyonProhibition';
 import {
-  CanyonLocationFromJSON,
-  CanyonLocationFromJSONTyped,
-  CanyonLocationToJSON,
-  CanyonLocationToJSONTyped,
-} from './CanyonLocation'
-import type { CanyonProhibition } from './CanyonProhibition'
+    CanyonProhibitionFromJSON,
+    CanyonProhibitionFromJSONTyped,
+    CanyonProhibitionToJSON,
+    CanyonProhibitionToJSONTyped,
+} from './CanyonProhibition';
+import type { SimpleCanyon } from './SimpleCanyon';
 import {
-  CanyonProhibitionFromJSON,
-  CanyonProhibitionFromJSONTyped,
-  CanyonProhibitionToJSON,
-  CanyonProhibitionToJSONTyped,
-} from './CanyonProhibition'
-import type { CanyonDifficulty } from './CanyonDifficulty'
+    SimpleCanyonFromJSON,
+    SimpleCanyonFromJSONTyped,
+    SimpleCanyonToJSON,
+    SimpleCanyonToJSONTyped,
+} from './SimpleCanyon';
+import type { CanyonControlLevel } from './CanyonControlLevel';
 import {
-  CanyonDifficultyFromJSON,
-  CanyonDifficultyFromJSONTyped,
-  CanyonDifficultyToJSON,
-  CanyonDifficultyToJSONTyped,
-} from './CanyonDifficulty'
-import type { CanyonControlLevel } from './CanyonControlLevel'
+    CanyonControlLevelFromJSON,
+    CanyonControlLevelFromJSONTyped,
+    CanyonControlLevelToJSON,
+    CanyonControlLevelToJSONTyped,
+} from './CanyonControlLevel';
+import type { CanyonRappeling } from './CanyonRappeling';
 import {
-  CanyonControlLevelFromJSON,
-  CanyonControlLevelFromJSONTyped,
-  CanyonControlLevelToJSON,
-  CanyonControlLevelToJSONTyped,
-} from './CanyonControlLevel'
-import type { CanyonRappeling } from './CanyonRappeling'
-import {
-  CanyonRappelingFromJSON,
-  CanyonRappelingFromJSONTyped,
-  CanyonRappelingToJSON,
-  CanyonRappelingToJSONTyped,
-} from './CanyonRappeling'
+    CanyonRappelingFromJSON,
+    CanyonRappelingFromJSONTyped,
+    CanyonRappelingToJSON,
+    CanyonRappelingToJSONTyped,
+} from './CanyonRappeling';
 
 /**
- *
+ * 
  * @export
  * @interface Canyon
  */
 export interface Canyon {
-  /**
-   *
-   * @type {number}
-   * @memberof Canyon
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  name?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  season?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  river?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  population?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  country?: string
-  /**
-   *
-   * @type {boolean}
-   * @memberof Canyon
-   */
-  favourite?: boolean
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  description?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  coverage?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  croquis?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  access?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  approach?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  descent?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  _return?: string
-  /**
-   *
-   * @type {string}
-   * @memberof Canyon
-   */
-  scape?: string
-  /**
-   *
-   * @type {CanyonLocation}
-   * @memberof Canyon
-   */
-  location?: CanyonLocation
-  /**
-   *
-   * @type {Array<CanyonRappeling>}
-   * @memberof Canyon
-   */
-  canyonRappeling?: Array<CanyonRappeling>
-  /**
-   *
-   * @type {Array<CanyonDescent>}
-   * @memberof Canyon
-   */
-  canyonDescent?: Array<CanyonDescent>
-  /**
-   *
-   * @type {Array<CanyonSchedule>}
-   * @memberof Canyon
-   */
-  canyonSchedule?: Array<CanyonSchedule>
-  /**
-   *
-   * @type {Array<CanyonLink>}
-   * @memberof Canyon
-   */
-  canyonLink?: Array<CanyonLink>
-  /**
-   *
-   * @type {Array<CanyonProhibition>}
-   * @memberof Canyon
-   */
-  canyonProhibition?: Array<CanyonProhibition>
-  /**
-   *
-   * @type {Array<CanyonDifficulty>}
-   * @memberof Canyon
-   */
-  canyonDifficulty?: Array<CanyonDifficulty>
-  /**
-   *
-   * @type {Array<CanyonCanyonNear>}
-   * @memberof Canyon
-   */
-  canyonCanyonNear?: Array<CanyonCanyonNear>
-  /**
-   *
-   * @type {Array<CanyonControlLevel>}
-   * @memberof Canyon
-   */
-  canyonControlLevel?: Array<CanyonControlLevel>
+    /**
+     * 
+     * @type {number}
+     * @memberof Canyon
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    season?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    river?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    population?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    country?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Canyon
+     */
+    favourite?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    description?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    coverage?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    croquis?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    access?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    approach?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    descent?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    _return?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    scape?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    geology?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Canyon
+     */
+    difficultyDesc?: string;
+    /**
+     * 
+     * @type {CanyonLocation}
+     * @memberof Canyon
+     */
+    location?: CanyonLocation;
+    /**
+     * 
+     * @type {Array<CanyonRappeling>}
+     * @memberof Canyon
+     */
+    canyonRappeling?: Array<CanyonRappeling>;
+    /**
+     * 
+     * @type {Array<CanyonDescent>}
+     * @memberof Canyon
+     */
+    canyonDescent?: Array<CanyonDescent>;
+    /**
+     * 
+     * @type {Array<CanyonSchedule>}
+     * @memberof Canyon
+     */
+    canyonSchedule?: Array<CanyonSchedule>;
+    /**
+     * 
+     * @type {Array<CanyonLink>}
+     * @memberof Canyon
+     */
+    canyonLink?: Array<CanyonLink>;
+    /**
+     * 
+     * @type {Array<CanyonProhibition>}
+     * @memberof Canyon
+     */
+    canyonProhibition?: Array<CanyonProhibition>;
+    /**
+     * 
+     * @type {Array<SimpleCanyon>}
+     * @memberof Canyon
+     */
+    canyonCanyonNear?: Array<SimpleCanyon>;
+    /**
+     * 
+     * @type {Array<CanyonControlLevel>}
+     * @memberof Canyon
+     */
+    canyonControlLevel?: Array<CanyonControlLevel>;
 }
 
 /**
  * Check if a given object implements the Canyon interface.
  */
 export function instanceOfCanyon(value: object): value is Canyon {
-  return true
+    return true;
 }
 
 export function CanyonFromJSON(json: any): Canyon {
-  return CanyonFromJSONTyped(json, false)
+    return CanyonFromJSONTyped(json, false);
 }
 
 export function CanyonFromJSONTyped(json: any, ignoreDiscriminator: boolean): Canyon {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    name: json['name'] == null ? undefined : json['name'],
-    season: json['season'] == null ? undefined : json['season'],
-    river: json['river'] == null ? undefined : json['river'],
-    population: json['population'] == null ? undefined : json['population'],
-    country: json['country'] == null ? undefined : json['country'],
-    favourite: json['favourite'] == null ? undefined : json['favourite'],
-    description: json['description'] == null ? undefined : json['description'],
-    coverage: json['coverage'] == null ? undefined : json['coverage'],
-    croquis: json['croquis'] == null ? undefined : json['croquis'],
-    access: json['access'] == null ? undefined : json['access'],
-    approach: json['approach'] == null ? undefined : json['approach'],
-    descent: json['descent'] == null ? undefined : json['descent'],
-    _return: json['_return'] == null ? undefined : json['_return'],
-    scape: json['scape'] == null ? undefined : json['scape'],
-    location: json['location'] == null ? undefined : CanyonLocationFromJSON(json['location']),
-    canyonRappeling:
-      json['canyonRappeling'] == null
-        ? undefined
-        : (json['canyonRappeling'] as Array<any>).map(CanyonRappelingFromJSON),
-    canyonDescent:
-      json['canyonDescent'] == null
-        ? undefined
-        : (json['canyonDescent'] as Array<any>).map(CanyonDescentFromJSON),
-    canyonSchedule:
-      json['canyonSchedule'] == null
-        ? undefined
-        : (json['canyonSchedule'] as Array<any>).map(CanyonScheduleFromJSON),
-    canyonLink:
-      json['canyonLink'] == null
-        ? undefined
-        : (json['canyonLink'] as Array<any>).map(CanyonLinkFromJSON),
-    canyonProhibition:
-      json['canyonProhibition'] == null
-        ? undefined
-        : (json['canyonProhibition'] as Array<any>).map(CanyonProhibitionFromJSON),
-    canyonDifficulty:
-      json['canyonDifficulty'] == null
-        ? undefined
-        : (json['canyonDifficulty'] as Array<any>).map(CanyonDifficultyFromJSON),
-    canyonCanyonNear:
-      json['canyonCanyonNear'] == null
-        ? undefined
-        : (json['canyonCanyonNear'] as Array<any>).map(CanyonCanyonNearFromJSON),
-    canyonControlLevel:
-      json['canyonControlLevel'] == null
-        ? undefined
-        : (json['canyonControlLevel'] as Array<any>).map(CanyonControlLevelFromJSON),
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'season': json['season'] == null ? undefined : json['season'],
+        'river': json['river'] == null ? undefined : json['river'],
+        'population': json['population'] == null ? undefined : json['population'],
+        'country': json['country'] == null ? undefined : json['country'],
+        'favourite': json['favourite'] == null ? undefined : json['favourite'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'coverage': json['coverage'] == null ? undefined : json['coverage'],
+        'croquis': json['croquis'] == null ? undefined : json['croquis'],
+        'access': json['access'] == null ? undefined : json['access'],
+        'approach': json['approach'] == null ? undefined : json['approach'],
+        'descent': json['descent'] == null ? undefined : json['descent'],
+        '_return': json['_return'] == null ? undefined : json['_return'],
+        'scape': json['scape'] == null ? undefined : json['scape'],
+        'geology': json['geology'] == null ? undefined : json['geology'],
+        'difficultyDesc': json['difficultyDesc'] == null ? undefined : json['difficultyDesc'],
+        'location': json['location'] == null ? undefined : CanyonLocationFromJSON(json['location']),
+        'canyonRappeling': json['canyonRappeling'] == null ? undefined : ((json['canyonRappeling'] as Array<any>).map(CanyonRappelingFromJSON)),
+        'canyonDescent': json['canyonDescent'] == null ? undefined : ((json['canyonDescent'] as Array<any>).map(CanyonDescentFromJSON)),
+        'canyonSchedule': json['canyonSchedule'] == null ? undefined : ((json['canyonSchedule'] as Array<any>).map(CanyonScheduleFromJSON)),
+        'canyonLink': json['canyonLink'] == null ? undefined : ((json['canyonLink'] as Array<any>).map(CanyonLinkFromJSON)),
+        'canyonProhibition': json['canyonProhibition'] == null ? undefined : ((json['canyonProhibition'] as Array<any>).map(CanyonProhibitionFromJSON)),
+        'canyonCanyonNear': json['canyonCanyonNear'] == null ? undefined : ((json['canyonCanyonNear'] as Array<any>).map(SimpleCanyonFromJSON)),
+        'canyonControlLevel': json['canyonControlLevel'] == null ? undefined : ((json['canyonControlLevel'] as Array<any>).map(CanyonControlLevelFromJSON)),
+    };
 }
 
 export function CanyonToJSON(json: any): Canyon {
-  return CanyonToJSONTyped(json, false)
+    return CanyonToJSONTyped(json, false);
 }
 
-export function CanyonToJSONTyped(
-  value?: Canyon | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonToJSONTyped(value?: Canyon | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonId: value['canyonId'],
-    name: value['name'],
-    season: value['season'],
-    river: value['river'],
-    population: value['population'],
-    country: value['country'],
-    favourite: value['favourite'],
-    description: value['description'],
-    coverage: value['coverage'],
-    croquis: value['croquis'],
-    access: value['access'],
-    approach: value['approach'],
-    descent: value['descent'],
-    _return: value['_return'],
-    scape: value['scape'],
-    location: CanyonLocationToJSON(value['location']),
-    canyonRappeling:
-      value['canyonRappeling'] == null
-        ? undefined
-        : (value['canyonRappeling'] as Array<any>).map(CanyonRappelingToJSON),
-    canyonDescent:
-      value['canyonDescent'] == null
-        ? undefined
-        : (value['canyonDescent'] as Array<any>).map(CanyonDescentToJSON),
-    canyonSchedule:
-      value['canyonSchedule'] == null
-        ? undefined
-        : (value['canyonSchedule'] as Array<any>).map(CanyonScheduleToJSON),
-    canyonLink:
-      value['canyonLink'] == null
-        ? undefined
-        : (value['canyonLink'] as Array<any>).map(CanyonLinkToJSON),
-    canyonProhibition:
-      value['canyonProhibition'] == null
-        ? undefined
-        : (value['canyonProhibition'] as Array<any>).map(CanyonProhibitionToJSON),
-    canyonDifficulty:
-      value['canyonDifficulty'] == null
-        ? undefined
-        : (value['canyonDifficulty'] as Array<any>).map(CanyonDifficultyToJSON),
-    canyonCanyonNear:
-      value['canyonCanyonNear'] == null
-        ? undefined
-        : (value['canyonCanyonNear'] as Array<any>).map(CanyonCanyonNearToJSON),
-    canyonControlLevel:
-      value['canyonControlLevel'] == null
-        ? undefined
-        : (value['canyonControlLevel'] as Array<any>).map(CanyonControlLevelToJSON),
-  }
+    return {
+        
+        'canyonId': value['canyonId'],
+        'name': value['name'],
+        'season': value['season'],
+        'river': value['river'],
+        'population': value['population'],
+        'country': value['country'],
+        'favourite': value['favourite'],
+        'description': value['description'],
+        'coverage': value['coverage'],
+        'croquis': value['croquis'],
+        'access': value['access'],
+        'approach': value['approach'],
+        'descent': value['descent'],
+        '_return': value['_return'],
+        'scape': value['scape'],
+        'geology': value['geology'],
+        'difficultyDesc': value['difficultyDesc'],
+        'location': CanyonLocationToJSON(value['location']),
+        'canyonRappeling': value['canyonRappeling'] == null ? undefined : ((value['canyonRappeling'] as Array<any>).map(CanyonRappelingToJSON)),
+        'canyonDescent': value['canyonDescent'] == null ? undefined : ((value['canyonDescent'] as Array<any>).map(CanyonDescentToJSON)),
+        'canyonSchedule': value['canyonSchedule'] == null ? undefined : ((value['canyonSchedule'] as Array<any>).map(CanyonScheduleToJSON)),
+        'canyonLink': value['canyonLink'] == null ? undefined : ((value['canyonLink'] as Array<any>).map(CanyonLinkToJSON)),
+        'canyonProhibition': value['canyonProhibition'] == null ? undefined : ((value['canyonProhibition'] as Array<any>).map(CanyonProhibitionToJSON)),
+        'canyonCanyonNear': value['canyonCanyonNear'] == null ? undefined : ((value['canyonCanyonNear'] as Array<any>).map(SimpleCanyonToJSON)),
+        'canyonControlLevel': value['canyonControlLevel'] == null ? undefined : ((value['canyonControlLevel'] as Array<any>).map(CanyonControlLevelToJSON)),
+    };
 }
+

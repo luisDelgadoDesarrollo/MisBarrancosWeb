@@ -12,105 +12,94 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface CanyonRappeling
  */
 export interface CanyonRappeling {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonRappeling
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonRappeling
-   */
-  descentNumber?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonRappeling
-   */
-  step?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonRappeling
-   */
-  stepType?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonRappeling
-   */
-  length?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonRappeling
-   */
-  location?: string
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonRappeling
-   */
-  description?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonRappeling
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonRappeling
+     */
+    step?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonRappeling
+     */
+    stepType?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonRappeling
+     */
+    length?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonRappeling
+     */
+    location?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonRappeling
+     */
+    description?: string;
 }
 
 /**
  * Check if a given object implements the CanyonRappeling interface.
  */
 export function instanceOfCanyonRappeling(value: object): value is CanyonRappeling {
-  return true
+    return true;
 }
 
 export function CanyonRappelingFromJSON(json: any): CanyonRappeling {
-  return CanyonRappelingFromJSONTyped(json, false)
+    return CanyonRappelingFromJSONTyped(json, false);
 }
 
-export function CanyonRappelingFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): CanyonRappeling {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    descentNumber: json['descentNumber'] == null ? undefined : json['descentNumber'],
-    step: json['step'] == null ? undefined : json['step'],
-    stepType: json['stepType'] == null ? undefined : json['stepType'],
-    length: json['length'] == null ? undefined : json['length'],
-    location: json['location'] == null ? undefined : json['location'],
-    description: json['description'] == null ? undefined : json['description'],
-  }
+export function CanyonRappelingFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonRappeling {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'step': json['step'] == null ? undefined : json['step'],
+        'stepType': json['stepType'] == null ? undefined : json['stepType'],
+        'length': json['length'] == null ? undefined : json['length'],
+        'location': json['location'] == null ? undefined : json['location'],
+        'description': json['description'] == null ? undefined : json['description'],
+    };
 }
 
 export function CanyonRappelingToJSON(json: any): CanyonRappeling {
-  return CanyonRappelingToJSONTyped(json, false)
+    return CanyonRappelingToJSONTyped(json, false);
 }
 
-export function CanyonRappelingToJSONTyped(
-  value?: CanyonRappeling | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonRappelingToJSONTyped(value?: CanyonRappeling | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonId: value['canyonId'],
-    descentNumber: value['descentNumber'],
-    step: value['step'],
-    stepType: value['stepType'],
-    length: value['length'],
-    location: value['location'],
-    description: value['description'],
-  }
+    return {
+        
+        'canyonId': value['canyonId'],
+        'step': value['step'],
+        'stepType': value['stepType'],
+        'length': value['length'],
+        'location': value['location'],
+        'description': value['description'],
+    };
 }
+

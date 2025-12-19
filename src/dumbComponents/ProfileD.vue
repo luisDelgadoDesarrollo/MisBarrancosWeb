@@ -23,6 +23,7 @@
     <v-text-field label="Edad" v-model="user.age" :readonly="readonly" />
     <v-text-field label="Guía" v-model="user.guia" :readonly="readonly" />
     <ImagePickerD v-model="newImage" :readonly="readonly" />
+    <v-btn class="w-100 my-4" @click="goToFavourites">Favoritos</v-btn>
 
     <v-row class="pa-4" justify="space-between">
       <template v-if="!isMobile">
@@ -44,15 +45,19 @@
 
 <script setup lang="ts">
 import { type UserOut } from '@/api'
-import { getUserWithAuth, upsateUserWithAuth } from '@/authCalls/UserCalls'
+import { getUserWithAuth, upsateUserWithAuth } from '@/calls/UserCalls'
 import { isMobileCheck } from '@/utils/Responsive'
 import { onMounted, ref } from 'vue'
 import DatePickerD from './DatePickerD.vue'
 import ImagePickerD from './ImagePickerD.vue'
 import ImageD from './ImageD.vue'
 import { maxLongitud, runValidations, validateRequired } from '@/utils/Validations'
+import { useUserStore } from '@/stores/user'
+import { postImage } from '@/calls/ImageCalls'
+import router from '@/router'
 
 const model = defineModel<boolean>()
+const userStore = useUserStore()
 const isMobile = ref(isMobileCheck())
 const readonly = ref(true)
 const newImage = ref<File | undefined>()
@@ -97,12 +102,28 @@ const updateUser = async () => {
         birthDay: user.value.birthDay,
       },
     })
+    if (newImage.value) {
+      postImage({
+        file: newImage.value as Blob,
+        name: user.value.email!,
+        dir: 'user',
+      })
+    }
+    close()
   }
+}
+
+const goToFavourites = () => {
+  router.push({
+    name: 'canyonsFavourites',
+  })
+  close()
 }
 
 const closeSession = () => {
   localStorage.removeItem('email')
   localStorage.removeItem('authCredentials')
+  userStore.logOutuser()
   model.value = false
 }
 const close = () => {

@@ -12,111 +12,110 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface UserCreate
  */
 export interface UserCreate {
-  /**
-   *
-   * @type {number}
-   * @memberof UserCreate
-   */
-  userId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof UserCreate
-   */
-  email?: string
-  /**
-   *
-   * @type {string}
-   * @memberof UserCreate
-   */
-  name?: string
-  /**
-   *
-   * @type {string}
-   * @memberof UserCreate
-   */
-  lastName?: string
-  /**
-   *
-   * @type {string}
-   * @memberof UserCreate
-   */
-  location?: string
-  /**
-   *
-   * @type {string}
-   * @memberof UserCreate
-   */
-  description?: string
-  /**
-   *
-   * @type {Date}
-   * @memberof UserCreate
-   */
-  birthDay?: Date
-  /**
-   *
-   * @type {string}
-   * @memberof UserCreate
-   */
-  password?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof UserCreate
+     */
+    userId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreate
+     */
+    email?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreate
+     */
+    name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreate
+     */
+    lastName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreate
+     */
+    location?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreate
+     */
+    description?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof UserCreate
+     */
+    birthDay?: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserCreate
+     */
+    password?: string;
 }
 
 /**
  * Check if a given object implements the UserCreate interface.
  */
 export function instanceOfUserCreate(value: object): value is UserCreate {
-  return true
+    return true;
 }
 
 export function UserCreateFromJSON(json: any): UserCreate {
-  return UserCreateFromJSONTyped(json, false)
+    return UserCreateFromJSONTyped(json, false);
 }
 
 export function UserCreateFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserCreate {
-  if (json == null) {
-    return json
-  }
-  return {
-    userId: json['userId'] == null ? undefined : json['userId'],
-    email: json['email'] == null ? undefined : json['email'],
-    name: json['name'] == null ? undefined : json['name'],
-    lastName: json['lastName'] == null ? undefined : json['lastName'],
-    location: json['location'] == null ? undefined : json['location'],
-    description: json['description'] == null ? undefined : json['description'],
-    birthDay: json['birthDay'] == null ? undefined : new Date(json['birthDay']),
-    password: json['password'] == null ? undefined : json['password'],
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'userId': json['userId'] == null ? undefined : json['userId'],
+        'email': json['email'] == null ? undefined : json['email'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'lastName': json['lastName'] == null ? undefined : json['lastName'],
+        'location': json['location'] == null ? undefined : json['location'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'birthDay': json['birthDay'] == null ? undefined : (new Date(json['birthDay'])),
+        'password': json['password'] == null ? undefined : json['password'],
+    };
 }
 
 export function UserCreateToJSON(json: any): UserCreate {
-  return UserCreateToJSONTyped(json, false)
+    return UserCreateToJSONTyped(json, false);
 }
 
-export function UserCreateToJSONTyped(
-  value?: UserCreate | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function UserCreateToJSONTyped(value?: UserCreate | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    userId: value['userId'],
-    email: value['email'],
-    name: value['name'],
-    lastName: value['lastName'],
-    location: value['location'],
-    description: value['description'],
-    birthDay:
-      value['birthDay'] == null ? undefined : value['birthDay'].toISOString().substring(0, 10),
-    password: value['password'],
-  }
+    return {
+        
+        'userId': value['userId'],
+        'email': value['email'],
+        'name': value['name'],
+        'lastName': value['lastName'],
+        'location': value['location'],
+        'description': value['description'],
+        'birthDay': value['birthDay'] == null ? undefined : ((value['birthDay']).toISOString().substring(0,10)),
+        'password': value['password'],
+    };
 }
+

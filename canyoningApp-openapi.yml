@@ -15,15 +15,202 @@ tags:
     description: Canyon operations
   - name: Review
     description: Review operations
-  - name: Activity
-    description: Activity operations
   - name: Message
     description: CanyonMessage operations
   - name: Image
     description: Image operations
-  - name: Article
-    description: Article operations
+  - name: Ad
+    description: Ads operations
 paths:
+  /ad:
+    post:
+      tags:
+        - Ad
+      summary: Create a new ad
+      description: Create a new ad
+      operationId: createAd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ad'
+        required: true
+      responses:
+        200:
+          description: Succesful operation
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        409:
+          $ref: '#/components/responses/409Exists'
+    get:
+      tags:
+        - Ad
+      summary: Get all ads
+      description: Get all ads
+      operationId: getAds
+      parameters:
+        - name: dateFrom
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: dateUntil
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: page
+          in: query
+          description: Número de página (empezando desde 0)
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          description: Número de elementos por página
+          required: false
+          schema:
+            type: integer
+            default: 20
+        - name: sort
+          in: query
+          description: Criterios de ordenación en el formato propiedad(,asc|desc). El orden por defecto es ascendente.
+          required: false
+          schema:
+            type: string
+            default: userId,asc
+      x-spring-paginated: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ad'
+          headers:
+            Link:
+              $ref: '#/components/headers/Link'
+            X-Page-Number:
+              $ref: '#/components/headers/X-Page-Number'
+            X-Total-Elements:
+              $ref: '#/components/headers/X-Total-Elements'
+            X-Total-Pages:
+              $ref: '#/components/headers/X-Total-Pages'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+  /ad/log:
+    post:
+      tags:
+        - Ad
+      summary: Create a new ad log
+      description: Create a new ad log
+      operationId: createAdLog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        200:
+          description: Succesful operation
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        409:
+          $ref: '#/components/responses/409Exists'
+  /ad/{adId}:
+    put:
+      tags:
+        - Ad
+      summary: Update an ad
+      description: Update an ad
+      operationId: updateAd
+      parameters:
+        - name: adId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ad'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+    delete:
+      tags:
+        - Ad
+      summary: Delete an ad
+      description: Delete an ad
+      operationId: deleteAd
+      parameters:
+        - name: adId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        404:
+          $ref: '#/components/responses/404NotFound'
+    get:
+      tags:
+        - Ad
+      summary: Get an ad
+      description: Get an ad
+      operationId: getAd
+      parameters:
+        - name: adId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+        404:
+          $ref: '#/components/responses/404NotFound'
+  /ad/date/{date}:
+    get:
+      tags:
+        - Ad
+      summary: Get an ad
+      description: Get an ad
+      operationId: getAdByDate
+      parameters:
+        - name: date
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+        404:
+          $ref: '#/components/responses/404NotFound'
   /createUser:
     post:
       tags:
@@ -284,35 +471,6 @@ paths:
                 type: boolean
         400:
           $ref: '#/components/responses/400BadRequest'
-  /users/{email}/plan/{plan}:
-    put:
-      tags:
-        - User
-      summary: Update your plan
-      description: Update your plan
-      operationId: updatePlan
-      parameters:
-        - name: email
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: plan
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SimpleUser'
-        400:
-          $ref: '#/components/responses/400BadRequest'
   /canyons:
     post:
       tags:
@@ -489,7 +647,7 @@ paths:
     post:
       tags:
         - Canyon
-      summary: Add canyon to favourites
+      summary: Ad canyon to favourites
       operationId: addCanyonToFavourites
       parameters:
         - name: canyonId
@@ -817,344 +975,6 @@ paths:
           description: Successful operation
         400:
           $ref: '#/components/responses/400BadRequest'
-  /activities:
-    post:
-      tags:
-        - Activity
-      summary: Create a new activity
-      description: Create a new activity
-      operationId: createActivity
-      requestBody:
-        description: data from the activity
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Activity'
-        required: true
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Activity'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-    get:
-      tags:
-        - Activity
-      summary: Get all activity
-      description: Get all activity filtering by differents fields
-      operationId: getActivities
-      parameters:
-        - name: date
-          in: query
-          required: false
-          schema:
-            type: string
-            format: date
-        - name: meetingPlace
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: page
-          in: query
-          description: Número de página (empezando desde 0)
-          required: false
-          schema:
-            type: integer
-            default: 0
-        - name: size
-          in: query
-          description: Número de elementos por página
-          required: false
-          schema:
-            type: integer
-            default: 20
-        - name: sort
-          in: query
-          description: Criterios de ordenación en el formato propiedad(,asc|desc). El orden por defecto es ascendente.
-          required: false
-          schema:
-            type: string
-            default: "activityId,asc"
-      x-spring-paginated: true
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SimpleActivity'
-          headers:
-            Link:
-              $ref: '#/components/headers/Link'
-            X-Page-Number:
-              $ref: '#/components/headers/X-Page-Number'
-            X-Total-Elements:
-              $ref: '#/components/headers/X-Total-Elements'
-            X-Total-Pages:
-              $ref: '#/components/headers/X-Total-Pages'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-  /activities/{activityId}:
-    get:
-      tags:
-        - Activity
-      summary: Get an activity
-      description: Get activity by id
-      operationId: getActivity
-      parameters:
-        - name: activityId
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Activity'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-    put:
-      tags:
-        - Activity
-      summary: Update your activity
-      description: Update your activity
-      operationId: updateActivity
-      parameters:
-        - name: activityId
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Activity'
-      responses:
-        200:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Activity'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-    delete:
-      tags:
-        - Activity
-      summary: Deletes a activity
-      description: delete a activity
-      operationId: deleteActivity
-      parameters:
-        - name: activityId
-          in: path
-          description: Activity id to delete
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-      responses:
-        204:
-          description: 'Succesfull delete'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-  /activities/{activityId}/share:
-    get:
-      tags:
-        - Activity
-      summary: Share your activity qr
-      description: Share your activity qr
-      operationId: shareActivity
-      parameters:
-        - name: activityId
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-      responses:
-        200:
-          description: Successful operation
-        400:
-          $ref: '#/components/responses/400BadRequest'
-  /activities/{activityId}/share/{userId}:
-    post:
-      tags:
-        - Activity
-      summary: Insert an user on your activity
-      description: Insert an user on your activity
-      operationId: insertActivity
-      parameters:
-        - name: activityId
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-        - name: userId
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-      responses:
-        200:
-          description: Successful operation
-        400:
-          $ref: '#/components/responses/400BadRequest'
-  /article:
-    post:
-      tags:
-        - Article
-      summary: Post an article
-      description: Post a nes article
-      operationId: createArticle
-      requestBody:
-        description: data from the article
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Article'
-        required: true
-      responses:
-        201:
-          description: Successful operation
-        400:
-          $ref: '#/components/responses/400BadRequest'
-    get:
-      tags:
-        - Article
-      summary: Get all articles
-      description: Return all articles paginated
-      operationId: getAtricles
-      parameters:
-        - name: title
-          in: query
-          description: title of the article
-          required: false
-          schema:
-            type: string
-        - name: location
-          in: query
-          description: it will find articles near the location
-          required: false
-          schema:
-            type: string
-        - name: organizer
-          in: query
-          description: organizer of the article
-          required: false
-          schema:
-            type: string
-        - name: page
-          in: query
-          description: Número de página (empezando desde 0)
-          required: false
-          schema:
-            type: integer
-            default: 0
-        - name: size
-          in: query
-          description: Número de elementos por página
-          required: false
-          schema:
-            type: integer
-            default: 20
-        - name: sort
-          in: query
-          description: Criterios de ordenación en el formato propiedad(,asc|desc). El orden por defecto es ascendente.
-          required: false
-          schema:
-            type: string
-            default: "articleId,asc"
-      x-spring-paginated: true
-      responses:
-        201:
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SimpleArticle'
-          headers:
-            Link:
-              $ref: '#/components/headers/Link'
-            X-Page-Number:
-              $ref: '#/components/headers/X-Page-Number'
-            X-Total-Elements:
-              $ref: '#/components/headers/X-Total-Elements'
-            X-Total-Pages:
-              $ref: '#/components/headers/X-Total-Pages'
-        400:
-          $ref: '#/components/responses/400BadRequest'
-  /article/{articleId}:
-    get:
-      tags:
-        - Article
-      summary: Get an article by id
-      description: Find an article by id
-      operationId: getArticleById
-      parameters:
-        - name: articleId
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-      responses:
-        200:
-          description: Succesful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Article'
-        404:
-          $ref: '#/components/responses/404NotFound'
-    delete:
-      tags:
-        - Article
-      summary: delete an article
-      description: delete an article
-      operationId: deleteArticle
-      parameters:
-        - name: articleId
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-      responses:
-        204:
-          description: Successful operation
-        400:
-          $ref: '#/components/responses/400BadRequest'
-    put:
-      tags:
-        - Article
-      summary: update an article
-      description: update an article
-      operationId: updateArticle
-      parameters:
-        - name: articleId
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/Id'
-      requestBody:
-        description: data from the message
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Article'
-      responses:
-        200:
-          description: Successful operation
-        400:
-          $ref: '#/components/responses/400BadRequest'
   /messages:
     post:
       tags:
@@ -1167,27 +987,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MessageIn'
+              $ref: '#/components/schemas/Message'
         required: true
       responses:
         201:
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOut'
         400:
           $ref: '#/components/responses/400BadRequest'
-  /messages/{activityType}/activity/{activityId}:
+  /messages/{canyonId}:
     get:
       tags:
         - Message
-      summary: Get all message about an activity
-      description: Get all message about an activity
+      summary: Get all message about a canyon
+      description: Get all message about a canyon
       operationId: getMessages
       parameters:
-        - name: activityType
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/ActivityType'
-        - name: activityId
+        - name: canyonId
           in: path
           required: true
           schema:
@@ -1243,14 +1062,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MessageIn'
+              $ref: '#/components/schemas/Message'
         required: true
       responses:
         200:
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOut'
         400:
           $ref: '#/components/responses/400BadRequest'
-  /message/{messageId}/activityType/{activityType}:
+  /message/{messageId}:
     delete:
       tags:
         - Message
@@ -1263,11 +1086,6 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/Id'
-        - name: activityType
-          in: path
-          required: true
-          schema:
-            $ref: '#/components/schemas/ActivityType'
       responses:
         204:
           description: Successful operation
@@ -1342,46 +1160,32 @@ paths:
                     type: string
 components:
   schemas:
-    Article:
-      allOf:
-        - $ref: '#/components/schemas/SimpleArticle'
-        - properties:
-            description:
-              type: string
-            image:
-              type: string
-            price:
-              type: string
-            link:
-              type: string
-            instagram:
-              type: string
-            twitter:
-              type: string
-            tiktok:
-              type: string
-            facebook:
-              type: string
-            createdBy:
-              type: string
-    SimpleArticle:
+    Ad:
       type: object
       properties:
-        articleId:
+        adId:
+          type: string
+        link:
+          type: string
+        image:
+          type: string
+        info:
+          type: string
+        code:
+          type: string
+        dateFrom:
+          type: string
+          format: date
+        dateUntil:
+          type: string
+          format: date
+    AdLog:
+      type: object
+      properties:
+        adId:
+          type: string
+        userId:
           $ref: '#/components/schemas/Id'
-        articleType:
-          type: integer
-        organizer:
-          type: string
-        location:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        articleDate:
-          type: string
-          format: date-time
     UserIdsRequest:
       type: array
       items:
@@ -1402,52 +1206,12 @@ components:
           type: integer
         temperature:
           type: integer
-    MessageIn:
-      allOf:
-        - $ref: '#/components/schemas/Message'
-        - properties:
-            typePlace:
-              $ref: '#/components/schemas/ActivityType'
     MessageOut:
       allOf:
         - $ref: '#/components/schemas/Message'
         - properties:
             user:
               $ref: '#/components/schemas/SimpleUser'
-    ActivityType:
-      type: string
-      enum:
-        - CANYON
-    SimpleActivity:
-      type: object
-      properties:
-        activityId:
-          $ref: '#/components/schemas/Id'
-        user:
-          $ref: '#/components/schemas/SimpleUser'
-        date:
-          type: string
-          format: date
-        meetingPlace:
-          type: string
-        activityType:
-          type: string
-    Activity:
-      allOf:
-        - $ref: '#/components/schemas/SimpleActivity'
-        - properties:
-            capacity:
-              type: integer
-            meetingTime:
-              type: string
-            description:
-              type: string
-            qr:
-              type: string
-            participants:
-              type: array
-              items:
-                $ref: '#/components/schemas/Id'
     LocationCanyon:
       type: object
       properties:
@@ -1463,10 +1227,8 @@ components:
           type: string
         country:
           type: string
-        canyonDifficulty:
-          type: array
-          items:
-            $ref: '#/components/schemas/CanyonDifficulty'
+        difficultyDesc:
+          type: string
     SimpleCanyon:
       type: object
       properties:
@@ -1504,6 +1266,10 @@ components:
               type: string
             scape:
               type: string
+            geology:
+              type: string
+            difficultyDesc:
+              type: string
             location:
               $ref: '#/components/schemas/CanyonLocation'
             canyonRappeling:
@@ -1526,14 +1292,10 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/CanyonProhibition'
-            canyonDifficulty:
-              type: array
-              items:
-                $ref: '#/components/schemas/CanyonDifficulty'
             canyonCanyonNear:
               type: array
               items:
-                $ref: '#/components/schemas/CanyonCanyonNear'
+                $ref: '#/components/schemas/SimpleCanyon'
             canyonControlLevel:
               type: array
               items:
@@ -1553,13 +1315,6 @@ components:
           type: string
         zone:
           type: string
-    CanyonCanyonNear:
-      type: object
-      properties:
-        principalCanyon:
-          $ref: '#/components/schemas/Id'
-        nearCanyon:
-          type: string
     CanyonControlLevel:
       type: object
       properties:
@@ -1574,8 +1329,6 @@ components:
     CanyonDifficulty:
       type: object
       properties:
-        descentNumber:
-          type: integer
         canyonId:
           $ref: '#/components/schemas/Id'
         difficultyDesc:
@@ -1607,8 +1360,6 @@ components:
           $ref: '#/components/schemas/Id'
         car:
           type: integer
-        descentNumber:
-          type: integer
         approach:
           type: string
         descent:
@@ -1620,8 +1371,6 @@ components:
       properties:
         canyonId:
           $ref: '#/components/schemas/Id'
-        descentNumber:
-          type: integer
         length:
           type: string
         slope:
@@ -1637,8 +1386,6 @@ components:
       properties:
         canyonId:
           $ref: '#/components/schemas/Id'
-        descentNumber:
-          type: integer
         step:
           type: string
         stepType:
@@ -1708,8 +1455,6 @@ components:
         - $ref: '#/components/schemas/SimpleUser'
         - type: object
           properties:
-            plan:
-              type: integer
             guia:
               type: boolean
             age:

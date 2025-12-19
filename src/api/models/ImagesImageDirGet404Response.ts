@@ -12,59 +12,54 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface ImagesImageDirGet404Response
  */
 export interface ImagesImageDirGet404Response {
-  /**
-   *
-   * @type {string}
-   * @memberof ImagesImageDirGet404Response
-   */
-  message?: string
+    /**
+     * 
+     * @type {string}
+     * @memberof ImagesImageDirGet404Response
+     */
+    message?: string;
 }
 
 /**
  * Check if a given object implements the ImagesImageDirGet404Response interface.
  */
-export function instanceOfImagesImageDirGet404Response(
-  value: object,
-): value is ImagesImageDirGet404Response {
-  return true
+export function instanceOfImagesImageDirGet404Response(value: object): value is ImagesImageDirGet404Response {
+    return true;
 }
 
 export function ImagesImageDirGet404ResponseFromJSON(json: any): ImagesImageDirGet404Response {
-  return ImagesImageDirGet404ResponseFromJSONTyped(json, false)
+    return ImagesImageDirGet404ResponseFromJSONTyped(json, false);
 }
 
-export function ImagesImageDirGet404ResponseFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): ImagesImageDirGet404Response {
-  if (json == null) {
-    return json
-  }
-  return {
-    message: json['message'] == null ? undefined : json['message'],
-  }
+export function ImagesImageDirGet404ResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ImagesImageDirGet404Response {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'message': json['message'] == null ? undefined : json['message'],
+    };
 }
 
 export function ImagesImageDirGet404ResponseToJSON(json: any): ImagesImageDirGet404Response {
-  return ImagesImageDirGet404ResponseToJSONTyped(json, false)
+    return ImagesImageDirGet404ResponseToJSONTyped(json, false);
 }
 
-export function ImagesImageDirGet404ResponseToJSONTyped(
-  value?: ImagesImageDirGet404Response | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function ImagesImageDirGet404ResponseToJSONTyped(value?: ImagesImageDirGet404Response | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    message: value['message'],
-  }
+    return {
+        
+        'message': value['message'],
+    };
 }
+

@@ -12,652 +12,481 @@
  * Do not edit the class manually.
  */
 
-import * as runtime from '../runtime'
-import type { SimpleUser, UpdatePasswordRequest, UserCreate, UserOut } from '../models/index'
+
+import * as runtime from '../runtime';
+import type {
+  SimpleUser,
+  UpdatePasswordRequest,
+  UserCreate,
+  UserOut,
+} from '../models/index';
 import {
-  SimpleUserFromJSON,
-  SimpleUserToJSON,
-  UpdatePasswordRequestFromJSON,
-  UpdatePasswordRequestToJSON,
-  UserCreateFromJSON,
-  UserCreateToJSON,
-  UserOutFromJSON,
-  UserOutToJSON,
-} from '../models/index'
+    SimpleUserFromJSON,
+    SimpleUserToJSON,
+    UpdatePasswordRequestFromJSON,
+    UpdatePasswordRequestToJSON,
+    UserCreateFromJSON,
+    UserCreateToJSON,
+    UserOutFromJSON,
+    UserOutToJSON,
+} from '../models/index';
 
 export interface CreateUserRequest {
-  userCreate: UserCreate
+    userCreate: UserCreate;
 }
 
 export interface DeleteUserRequest {
-  email: string
+    email: string;
 }
 
 export interface GetUserRequest {
-  email: string
+    email: string;
 }
 
 export interface GetUsersRequest {
-  email?: string
-  name?: string
-  location?: string
-  page?: number
-  size?: number
-  sort?: string
+    email?: string;
+    name?: string;
+    location?: string;
+    page?: number;
+    size?: number;
+    sort?: string;
 }
 
 export interface LoginRequest {
-  email: string
-  updatePasswordRequest: UpdatePasswordRequest
+    email: string;
+    updatePasswordRequest: UpdatePasswordRequest;
 }
 
 export interface RequestUpdatePasswordRequest {
-  email: string
+    email: string;
 }
 
 export interface UpdatePasswordOperationRequest {
-  email: string
-  token: string
-  updatePasswordRequest: UpdatePasswordRequest
-}
-
-export interface UpdatePlanRequest {
-  email: string
-  plan: number
+    email: string;
+    token: string;
+    updatePasswordRequest: UpdatePasswordRequest;
 }
 
 export interface UpdateUserRequest {
-  email: string
-  simpleUser?: SimpleUser
+    email: string;
+    simpleUser?: SimpleUser;
 }
 
 export interface ValidateUserRequest {
-  token: string
+    token: string;
 }
 
 /**
- *
+ * 
  */
 export class UserApi extends runtime.BaseAPI {
-  /**
-   * Create a new user
-   * Create a new user
-   */
-  async createUserRaw(
-    requestParameters: CreateUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<UserOut>> {
-    if (requestParameters['userCreate'] == null) {
-      throw new runtime.RequiredError(
-        'userCreate',
-        'Required parameter "userCreate" was null or undefined when calling createUser().',
-      )
+
+    /**
+     * Create a new user
+     * Create a new user
+     */
+    async createUserRaw(requestParameters: CreateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserOut>> {
+        if (requestParameters['userCreate'] == null) {
+            throw new runtime.RequiredError(
+                'userCreate',
+                'Required parameter "userCreate" was null or undefined when calling createUser().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/createUser`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UserCreateToJSON(requestParameters['userCreate']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserOutFromJSON(jsonValue));
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    const response = await this.request(
-      {
-        path: `/createUser`,
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-        body: UserCreateToJSON(requestParameters['userCreate']),
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => UserOutFromJSON(jsonValue))
-  }
-
-  /**
-   * Create a new user
-   * Create a new user
-   */
-  async createUser(
-    requestParameters: CreateUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<UserOut> {
-    const response = await this.createUserRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * delete a user
-   * Deletes a user
-   */
-  async deleteUserRaw(
-    requestParameters: DeleteUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['email'] == null) {
-      throw new runtime.RequiredError(
-        'email',
-        'Required parameter "email" was null or undefined when calling deleteUser().',
-      )
+    /**
+     * Create a new user
+     * Create a new user
+     */
+    async createUser(requestParameters: CreateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserOut> {
+        const response = await this.createUserRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    const queryParameters: any = {}
+    /**
+     * delete a user
+     * Deletes a user
+     */
+    async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['email'] == null) {
+            throw new runtime.RequiredError(
+                'email',
+                'Required parameter "email" was null or undefined when calling deleteUser().'
+            );
+        }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+        const queryParameters: any = {};
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/users/{email}`.replace(
-          `{${'email'}}`,
-          encodeURIComponent(String(requestParameters['email'])),
-        ),
-        method: 'DELETE',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        const headerParameters: runtime.HTTPHeaders = {};
 
-    return new runtime.VoidApiResponse(response)
-  }
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/users/{email}`.replace(`{${"email"}}`, encodeURIComponent(String(requestParameters['email']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
 
-  /**
-   * delete a user
-   * Deletes a user
-   */
-  async deleteUser(
-    requestParameters: DeleteUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.deleteUserRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * Get user by id
-   * Get an user
-   */
-  async getUserRaw(
-    requestParameters: GetUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<UserOut>> {
-    if (requestParameters['email'] == null) {
-      throw new runtime.RequiredError(
-        'email',
-        'Required parameter "email" was null or undefined when calling getUser().',
-      )
+        return new runtime.VoidApiResponse(response);
     }
 
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/users/{email}`.replace(
-          `{${'email'}}`,
-          encodeURIComponent(String(requestParameters['email'])),
-        ),
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => UserOutFromJSON(jsonValue))
-  }
-
-  /**
-   * Get user by id
-   * Get an user
-   */
-  async getUser(
-    requestParameters: GetUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<UserOut> {
-    const response = await this.getUserRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Get all users filtering bay differents fields
-   * Get all users
-   */
-  async getUsersRaw(
-    requestParameters: GetUsersRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Array<SimpleUser>>> {
-    const queryParameters: any = {}
-
-    if (requestParameters['email'] != null) {
-      queryParameters['email'] = requestParameters['email']
+    /**
+     * delete a user
+     * Deletes a user
+     */
+    async deleteUser(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteUserRaw(requestParameters, initOverrides);
     }
 
-    if (requestParameters['name'] != null) {
-      queryParameters['name'] = requestParameters['name']
+    /**
+     * Get user by id
+     * Get an user
+     */
+    async getUserRaw(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserOut>> {
+        if (requestParameters['email'] == null) {
+            throw new runtime.RequiredError(
+                'email',
+                'Required parameter "email" was null or undefined when calling getUser().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/users/{email}`.replace(`{${"email"}}`, encodeURIComponent(String(requestParameters['email']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserOutFromJSON(jsonValue));
     }
 
-    if (requestParameters['location'] != null) {
-      queryParameters['location'] = requestParameters['location']
+    /**
+     * Get user by id
+     * Get an user
+     */
+    async getUser(requestParameters: GetUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserOut> {
+        const response = await this.getUserRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['page'] != null) {
-      queryParameters['page'] = requestParameters['page']
+    /**
+     * Get all users filtering bay differents fields
+     * Get all users
+     */
+    async getUsersRaw(requestParameters: GetUsersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<SimpleUser>>> {
+        const queryParameters: any = {};
+
+        if (requestParameters['email'] != null) {
+            queryParameters['email'] = requestParameters['email'];
+        }
+
+        if (requestParameters['name'] != null) {
+            queryParameters['name'] = requestParameters['name'];
+        }
+
+        if (requestParameters['location'] != null) {
+            queryParameters['location'] = requestParameters['location'];
+        }
+
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
+        if (requestParameters['size'] != null) {
+            queryParameters['size'] = requestParameters['size'];
+        }
+
+        if (requestParameters['sort'] != null) {
+            queryParameters['sort'] = requestParameters['sort'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/users`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SimpleUserFromJSON));
     }
 
-    if (requestParameters['size'] != null) {
-      queryParameters['size'] = requestParameters['size']
+    /**
+     * Get all users filtering bay differents fields
+     * Get all users
+     */
+    async getUsers(requestParameters: GetUsersRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<SimpleUser>> {
+        const response = await this.getUsersRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['sort'] != null) {
-      queryParameters['sort'] = requestParameters['sort']
+    /**
+     * Login
+     * Login
+     */
+    async loginRaw(requestParameters: LoginRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<boolean>> {
+        if (requestParameters['email'] == null) {
+            throw new runtime.RequiredError(
+                'email',
+                'Required parameter "email" was null or undefined when calling login().'
+            );
+        }
+
+        if (requestParameters['updatePasswordRequest'] == null) {
+            throw new runtime.RequiredError(
+                'updatePasswordRequest',
+                'Required parameter "updatePasswordRequest" was null or undefined when calling login().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['email'] != null) {
+            queryParameters['email'] = requestParameters['email'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/login`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UpdatePasswordRequestToJSON(requestParameters['updatePasswordRequest']),
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<boolean>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
     }
 
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/users`,
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SimpleUserFromJSON))
-  }
-
-  /**
-   * Get all users filtering bay differents fields
-   * Get all users
-   */
-  async getUsers(
-    requestParameters: GetUsersRequest = {},
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Array<SimpleUser>> {
-    const response = await this.getUsersRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Login
-   * Login
-   */
-  async loginRaw(
-    requestParameters: LoginRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<boolean>> {
-    if (requestParameters['email'] == null) {
-      throw new runtime.RequiredError(
-        'email',
-        'Required parameter "email" was null or undefined when calling login().',
-      )
+    /**
+     * Login
+     * Login
+     */
+    async login(requestParameters: LoginRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<boolean> {
+        const response = await this.loginRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['updatePasswordRequest'] == null) {
-      throw new runtime.RequiredError(
-        'updatePasswordRequest',
-        'Required parameter "updatePasswordRequest" was null or undefined when calling login().',
-      )
+    /**
+     * Request update a password, it send an email and the user could change its password for an hour
+     * Request update a password
+     */
+    async requestUpdatePasswordRaw(requestParameters: RequestUpdatePasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['email'] == null) {
+            throw new runtime.RequiredError(
+                'email',
+                'Required parameter "email" was null or undefined when calling requestUpdatePassword().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['email'] != null) {
+            queryParameters['email'] = requestParameters['email'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/updatePassword`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
     }
 
-    const queryParameters: any = {}
-
-    if (requestParameters['email'] != null) {
-      queryParameters['email'] = requestParameters['email']
+    /**
+     * Request update a password, it send an email and the user could change its password for an hour
+     * Request update a password
+     */
+    async requestUpdatePassword(requestParameters: RequestUpdatePasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.requestUpdatePasswordRaw(requestParameters, initOverrides);
     }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+    /**
+     * Return your password
+     * Update a password
+     */
+    async updatePasswordRaw(requestParameters: UpdatePasswordOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['email'] == null) {
+            throw new runtime.RequiredError(
+                'email',
+                'Required parameter "email" was null or undefined when calling updatePassword().'
+            );
+        }
 
-    headerParameters['Content-Type'] = 'application/json'
+        if (requestParameters['token'] == null) {
+            throw new runtime.RequiredError(
+                'token',
+                'Required parameter "token" was null or undefined when calling updatePassword().'
+            );
+        }
 
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/login`,
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-        body: UpdatePasswordRequestToJSON(requestParameters['updatePasswordRequest']),
-      },
-      initOverrides,
-    )
+        if (requestParameters['updatePasswordRequest'] == null) {
+            throw new runtime.RequiredError(
+                'updatePasswordRequest',
+                'Required parameter "updatePasswordRequest" was null or undefined when calling updatePassword().'
+            );
+        }
 
-    if (this.isJsonMime(response.headers.get('content-type'))) {
-      return new runtime.JSONApiResponse<boolean>(response)
-    } else {
-      return new runtime.TextApiResponse(response) as any
-    }
-  }
+        const queryParameters: any = {};
 
-  /**
-   * Login
-   * Login
-   */
-  async login(
-    requestParameters: LoginRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<boolean> {
-    const response = await this.loginRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
+        if (requestParameters['email'] != null) {
+            queryParameters['email'] = requestParameters['email'];
+        }
 
-  /**
-   * Request update a password, it send an email and the user could change its password for an hour
-   * Request update a password
-   */
-  async requestUpdatePasswordRaw(
-    requestParameters: RequestUpdatePasswordRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['email'] == null) {
-      throw new runtime.RequiredError(
-        'email',
-        'Required parameter "email" was null or undefined when calling requestUpdatePassword().',
-      )
+        if (requestParameters['token'] != null) {
+            queryParameters['token'] = requestParameters['token'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/updatePassword`,
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UpdatePasswordRequestToJSON(requestParameters['updatePasswordRequest']),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
     }
 
-    const queryParameters: any = {}
-
-    if (requestParameters['email'] != null) {
-      queryParameters['email'] = requestParameters['email']
+    /**
+     * Return your password
+     * Update a password
+     */
+    async updatePassword(requestParameters: UpdatePasswordOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.updatePasswordRaw(requestParameters, initOverrides);
     }
 
-    const headerParameters: runtime.HTTPHeaders = {}
+    /**
+     * Update your user
+     * Update your user
+     */
+    async updateUserRaw(requestParameters: UpdateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SimpleUser>> {
+        if (requestParameters['email'] == null) {
+            throw new runtime.RequiredError(
+                'email',
+                'Required parameter "email" was null or undefined when calling updateUser().'
+            );
+        }
 
-    const response = await this.request(
-      {
-        path: `/updatePassword`,
-        method: 'POST',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
+        const queryParameters: any = {};
 
-    return new runtime.VoidApiResponse(response)
-  }
+        const headerParameters: runtime.HTTPHeaders = {};
 
-  /**
-   * Request update a password, it send an email and the user could change its password for an hour
-   * Request update a password
-   */
-  async requestUpdatePassword(
-    requestParameters: RequestUpdatePasswordRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.requestUpdatePasswordRaw(requestParameters, initOverrides)
-  }
+        headerParameters['Content-Type'] = 'application/json';
 
-  /**
-   * Return your password
-   * Update a password
-   */
-  async updatePasswordRaw(
-    requestParameters: UpdatePasswordOperationRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<void>> {
-    if (requestParameters['email'] == null) {
-      throw new runtime.RequiredError(
-        'email',
-        'Required parameter "email" was null or undefined when calling updatePassword().',
-      )
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/users/{email}`.replace(`{${"email"}}`, encodeURIComponent(String(requestParameters['email']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: SimpleUserToJSON(requestParameters['simpleUser']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SimpleUserFromJSON(jsonValue));
     }
 
-    if (requestParameters['token'] == null) {
-      throw new runtime.RequiredError(
-        'token',
-        'Required parameter "token" was null or undefined when calling updatePassword().',
-      )
+    /**
+     * Update your user
+     * Update your user
+     */
+    async updateUser(requestParameters: UpdateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SimpleUser> {
+        const response = await this.updateUserRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['updatePasswordRequest'] == null) {
-      throw new runtime.RequiredError(
-        'updatePasswordRequest',
-        'Required parameter "updatePasswordRequest" was null or undefined when calling updatePassword().',
-      )
+    /**
+     * Validate an user created withour verify
+     * Validate user
+     */
+    async validateUserRaw(requestParameters: ValidateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters['token'] == null) {
+            throw new runtime.RequiredError(
+                'token',
+                'Required parameter "token" was null or undefined when calling validateUser().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['token'] != null) {
+            queryParameters['token'] = requestParameters['token'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
+            headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
+        }
+        const response = await this.request({
+            path: `/validateUser`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<string>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
     }
 
-    const queryParameters: any = {}
-
-    if (requestParameters['email'] != null) {
-      queryParameters['email'] = requestParameters['email']
+    /**
+     * Validate an user created withour verify
+     * Validate user
+     */
+    async validateUser(requestParameters: ValidateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
+        const response = await this.validateUserRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
-    if (requestParameters['token'] != null) {
-      queryParameters['token'] = requestParameters['token']
-    }
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    const response = await this.request(
-      {
-        path: `/updatePassword`,
-        method: 'PUT',
-        headers: headerParameters,
-        query: queryParameters,
-        body: UpdatePasswordRequestToJSON(requestParameters['updatePasswordRequest']),
-      },
-      initOverrides,
-    )
-
-    return new runtime.VoidApiResponse(response)
-  }
-
-  /**
-   * Return your password
-   * Update a password
-   */
-  async updatePassword(
-    requestParameters: UpdatePasswordOperationRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<void> {
-    await this.updatePasswordRaw(requestParameters, initOverrides)
-  }
-
-  /**
-   * Update your plan
-   * Update your plan
-   */
-  async updatePlanRaw(
-    requestParameters: UpdatePlanRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<Array<SimpleUser>>> {
-    if (requestParameters['email'] == null) {
-      throw new runtime.RequiredError(
-        'email',
-        'Required parameter "email" was null or undefined when calling updatePlan().',
-      )
-    }
-
-    if (requestParameters['plan'] == null) {
-      throw new runtime.RequiredError(
-        'plan',
-        'Required parameter "plan" was null or undefined when calling updatePlan().',
-      )
-    }
-
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/users/{email}/plan/{plan}`
-          .replace(`{${'email'}}`, encodeURIComponent(String(requestParameters['email'])))
-          .replace(`{${'plan'}}`, encodeURIComponent(String(requestParameters['plan']))),
-        method: 'PUT',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SimpleUserFromJSON))
-  }
-
-  /**
-   * Update your plan
-   * Update your plan
-   */
-  async updatePlan(
-    requestParameters: UpdatePlanRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<Array<SimpleUser>> {
-    const response = await this.updatePlanRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Update your user
-   * Update your user
-   */
-  async updateUserRaw(
-    requestParameters: UpdateUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<SimpleUser>> {
-    if (requestParameters['email'] == null) {
-      throw new runtime.RequiredError(
-        'email',
-        'Required parameter "email" was null or undefined when calling updateUser().',
-      )
-    }
-
-    const queryParameters: any = {}
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    headerParameters['Content-Type'] = 'application/json'
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/users/{email}`.replace(
-          `{${'email'}}`,
-          encodeURIComponent(String(requestParameters['email'])),
-        ),
-        method: 'PUT',
-        headers: headerParameters,
-        query: queryParameters,
-        body: SimpleUserToJSON(requestParameters['simpleUser']),
-      },
-      initOverrides,
-    )
-
-    return new runtime.JSONApiResponse(response, (jsonValue) => SimpleUserFromJSON(jsonValue))
-  }
-
-  /**
-   * Update your user
-   * Update your user
-   */
-  async updateUser(
-    requestParameters: UpdateUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<SimpleUser> {
-    const response = await this.updateUserRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
-
-  /**
-   * Validate an user created withour verify
-   * Validate user
-   */
-  async validateUserRaw(
-    requestParameters: ValidateUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<runtime.ApiResponse<string>> {
-    if (requestParameters['token'] == null) {
-      throw new runtime.RequiredError(
-        'token',
-        'Required parameter "token" was null or undefined when calling validateUser().',
-      )
-    }
-
-    const queryParameters: any = {}
-
-    if (requestParameters['token'] != null) {
-      queryParameters['token'] = requestParameters['token']
-    }
-
-    const headerParameters: runtime.HTTPHeaders = {}
-
-    if (
-      this.configuration &&
-      (this.configuration.username !== undefined || this.configuration.password !== undefined)
-    ) {
-      headerParameters['Authorization'] =
-        'Basic ' + btoa(this.configuration.username + ':' + this.configuration.password)
-    }
-    const response = await this.request(
-      {
-        path: `/validateUser`,
-        method: 'GET',
-        headers: headerParameters,
-        query: queryParameters,
-      },
-      initOverrides,
-    )
-
-    if (this.isJsonMime(response.headers.get('content-type'))) {
-      return new runtime.JSONApiResponse<string>(response)
-    } else {
-      return new runtime.TextApiResponse(response) as any
-    }
-  }
-
-  /**
-   * Validate an user created withour verify
-   * Validate user
-   */
-  async validateUser(
-    requestParameters: ValidateUserRequest,
-    initOverrides?: RequestInit | runtime.InitOverrideFunction,
-  ): Promise<string> {
-    const response = await this.validateUserRaw(requestParameters, initOverrides)
-    return await response.value()
-  }
 }

@@ -1,5 +1,5 @@
 import { ImageApi, type ImagesImageDirGetRequest, type PostImageRequest } from '@/api'
-import { withAuthHeaderMultiPartFormData } from './AuthApiUtils'
+import { withAuthHeaderMultiPartFormData } from './ApiUtils'
 
 const imageApi = new ImageApi()
 

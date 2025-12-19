@@ -57,6 +57,8 @@
           label="Descripcion"
         ></v-text-field>
 
+        <ImagePickerD :v-model="profileImage"></ImagePickerD>
+
         <v-row class="d-flex flex-row pa-4" justify="space-between">
           <!-- Botones con texto para pantallas grandes -->
           <v-btn v-if="!isMobile" color="warning" @click="deleteForm">Borrar todo</v-btn>
@@ -123,6 +125,8 @@ import { useAuthDialog } from '@/stores/dialogs'
 import DatePickerD from '../DatePickerD.vue'
 import { watch } from 'vue'
 import { isMobileCheck } from '@/utils/Responsive'
+import ImagePickerD from '../ImagePickerD.vue'
+import { postImage } from '@/calls/ImageCalls'
 
 const authDialog = useAuthDialog()
 
@@ -149,6 +153,7 @@ const show2 = ref(true)
 const createAccountFail = ref(false)
 const createAccountFailText = ref('')
 const isMobile = ref(isMobileCheck())
+const profileImage = ref<File | undefined>()
 
 const deleteForm = () => {
   userCreate.value.email = ''
@@ -188,6 +193,13 @@ async function sendForm() {
     try {
       await userApi.createUser(createUserRequest)
       userCreated.value = true
+      if (profileImage.value) {
+        postImage({
+          file: profileImage.value as Blob,
+          name: userCreate.value.email,
+          dir: 'user',
+        })
+      }
     } catch {
       userCreatedFail.value = true
     }

@@ -12,135 +12,133 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
-import type { SimpleUser } from './SimpleUser'
+import { mapValues } from '../runtime';
+import type { SimpleUser } from './SimpleUser';
 import {
-  SimpleUserFromJSON,
-  SimpleUserFromJSONTyped,
-  SimpleUserToJSON,
-  SimpleUserToJSONTyped,
-} from './SimpleUser'
-import type { SimpleCanyon } from './SimpleCanyon'
+    SimpleUserFromJSON,
+    SimpleUserFromJSONTyped,
+    SimpleUserToJSON,
+    SimpleUserToJSONTyped,
+} from './SimpleUser';
+import type { SimpleCanyon } from './SimpleCanyon';
 import {
-  SimpleCanyonFromJSON,
-  SimpleCanyonFromJSONTyped,
-  SimpleCanyonToJSON,
-  SimpleCanyonToJSONTyped,
-} from './SimpleCanyon'
+    SimpleCanyonFromJSON,
+    SimpleCanyonFromJSONTyped,
+    SimpleCanyonToJSON,
+    SimpleCanyonToJSONTyped,
+} from './SimpleCanyon';
 
 /**
- *
+ * 
  * @export
  * @interface CanyonReview
  */
 export interface CanyonReview {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonReview
-   */
-  canyonReviewId?: number
-  /**
-   *
-   * @type {SimpleCanyon}
-   * @memberof CanyonReview
-   */
-  canyon?: SimpleCanyon
-  /**
-   *
-   * @type {SimpleUser}
-   * @memberof CanyonReview
-   */
-  user?: SimpleUser
-  /**
-   *
-   * @type {Date}
-   * @memberof CanyonReview
-   */
-  date?: Date
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonReview
-   */
-  duration?: number
-  /**
-   *
-   * @type {boolean}
-   * @memberof CanyonReview
-   */
-  combinedCar?: boolean
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonReview
-   */
-  caudal?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonReview
-   */
-  description?: string
-  /**
-   *
-   * @type {Array<SimpleUser>}
-   * @memberof CanyonReview
-   */
-  users?: Array<SimpleUser>
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonReview
+     */
+    canyonReviewId?: number;
+    /**
+     * 
+     * @type {SimpleCanyon}
+     * @memberof CanyonReview
+     */
+    canyon?: SimpleCanyon;
+    /**
+     * 
+     * @type {SimpleUser}
+     * @memberof CanyonReview
+     */
+    user?: SimpleUser;
+    /**
+     * 
+     * @type {Date}
+     * @memberof CanyonReview
+     */
+    date?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonReview
+     */
+    duration?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CanyonReview
+     */
+    combinedCar?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonReview
+     */
+    caudal?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonReview
+     */
+    description?: string;
+    /**
+     * 
+     * @type {Array<SimpleUser>}
+     * @memberof CanyonReview
+     */
+    users?: Array<SimpleUser>;
 }
 
 /**
  * Check if a given object implements the CanyonReview interface.
  */
 export function instanceOfCanyonReview(value: object): value is CanyonReview {
-  return true
+    return true;
 }
 
 export function CanyonReviewFromJSON(json: any): CanyonReview {
-  return CanyonReviewFromJSONTyped(json, false)
+    return CanyonReviewFromJSONTyped(json, false);
 }
 
 export function CanyonReviewFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonReview {
-  if (json == null) {
-    return json
-  }
-  return {
-    canyonReviewId: json['canyonReviewId'] == null ? undefined : json['canyonReviewId'],
-    canyon: json['canyon'] == null ? undefined : SimpleCanyonFromJSON(json['canyon']),
-    user: json['user'] == null ? undefined : SimpleUserFromJSON(json['user']),
-    date: json['date'] == null ? undefined : new Date(json['date']),
-    duration: json['duration'] == null ? undefined : json['duration'],
-    combinedCar: json['combinedCar'] == null ? undefined : json['combinedCar'],
-    caudal: json['caudal'] == null ? undefined : json['caudal'],
-    description: json['description'] == null ? undefined : json['description'],
-    users:
-      json['users'] == null ? undefined : (json['users'] as Array<any>).map(SimpleUserFromJSON),
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonReviewId': json['canyonReviewId'] == null ? undefined : json['canyonReviewId'],
+        'canyon': json['canyon'] == null ? undefined : SimpleCanyonFromJSON(json['canyon']),
+        'user': json['user'] == null ? undefined : SimpleUserFromJSON(json['user']),
+        'date': json['date'] == null ? undefined : (new Date(json['date'])),
+        'duration': json['duration'] == null ? undefined : json['duration'],
+        'combinedCar': json['combinedCar'] == null ? undefined : json['combinedCar'],
+        'caudal': json['caudal'] == null ? undefined : json['caudal'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'users': json['users'] == null ? undefined : ((json['users'] as Array<any>).map(SimpleUserFromJSON)),
+    };
 }
 
 export function CanyonReviewToJSON(json: any): CanyonReview {
-  return CanyonReviewToJSONTyped(json, false)
+    return CanyonReviewToJSONTyped(json, false);
 }
 
-export function CanyonReviewToJSONTyped(
-  value?: CanyonReview | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonReviewToJSONTyped(value?: CanyonReview | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    canyonReviewId: value['canyonReviewId'],
-    canyon: SimpleCanyonToJSON(value['canyon']),
-    user: SimpleUserToJSON(value['user']),
-    date: value['date'] == null ? undefined : value['date'].toISOString().substring(0, 10),
-    duration: value['duration'],
-    combinedCar: value['combinedCar'],
-    caudal: value['caudal'],
-    description: value['description'],
-    users:
-      value['users'] == null ? undefined : (value['users'] as Array<any>).map(SimpleUserToJSON),
-  }
+    return {
+        
+        'canyonReviewId': value['canyonReviewId'],
+        'canyon': SimpleCanyonToJSON(value['canyon']),
+        'user': SimpleUserToJSON(value['user']),
+        'date': value['date'] == null ? undefined : ((value['date']).toISOString().substring(0,10)),
+        'duration': value['duration'],
+        'combinedCar': value['combinedCar'],
+        'caudal': value['caudal'],
+        'description': value['description'],
+        'users': value['users'] == null ? undefined : ((value['users'] as Array<any>).map(SimpleUserToJSON)),
+    };
 }
+

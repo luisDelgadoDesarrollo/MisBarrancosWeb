@@ -22,8 +22,8 @@
                 ></v-list-item-title
               >
               <v-list-item-title
-                ><v-btn :to="getRoute('articles')" class="text-decoration-none"
-                  >Eventos y noticias</v-btn
+                ><v-btn :to="getRoute('disclaimer')" class="text-decoration-none"
+                  >Informacion legal</v-btn
                 ></v-list-item-title
               >
             </v-list-item>
@@ -40,25 +40,19 @@
           <!-- Sin color en las tabs -->
           <v-tab :to="getRoute('canyons')" class="text-decoration-none">Barrancos </v-tab>
           <v-tab :to="getRoute('map')" class="text-decoration-none">Mapa </v-tab>
-          <v-tab :to="getRoute('articles')" class="text-decoration-none">Eventos y noticias </v-tab>
+          <v-tab :to="getRoute('disclaimer')" class="text-decoration-none"
+            >Informacion legal
+          </v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
-
-    <v-tabs-window v-model="tab">
-      <v-tabs-window-item v-for="item in items" :key="item" :value="item">
-        <v-card flat>
-          <v-card-text>{{ text }}</v-card-text>
-        </v-card>
-      </v-tabs-window-item>
-    </v-tabs-window>
   </v-card>
 
   <v-dialog v-model="authDialog.authDialog" centered max-width="500px">
     <AuthD></AuthD>
   </v-dialog>
-  <v-dialog v-model="profile" centered max-width="500px">
-    <ProfileD v-model="profile"></ProfileD>
+  <v-dialog v-model="openProfile" centered max-width="500px">
+    <ProfileD v-model="openProfile"></ProfileD>
   </v-dialog>
 </template>
 
@@ -70,16 +64,13 @@ import { isMobileCheck } from '@/utils/Responsive'
 import ProfileD from './ProfileD.vue'
 
 const tab = ref('Barrancos')
-const items = ['Barrancos', 'Mapa', 'Eventos y Noticias']
-const text = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit...')
 
 const isMobile = ref(isMobileCheck())
 const authDialog = useAuthDialog()
-const profile = ref(false)
-
+const openProfile = ref(false)
 const profileClick = () => {
   if (localStorage.getItem('authCredentials') && localStorage.getItem('email')) {
-    profile.value = true
+    openProfile.value = true
   } else {
     authDialog.toogleAuthDialog()
   }
@@ -100,8 +91,8 @@ const getRoute = (tab: string) => {
       return '/canyons'
     case 'map':
       return '/map'
-    case 'articles':
-      return '/articles'
+    case 'disclaimer':
+      return '/disclaimer'
     default:
       return '/'
   }

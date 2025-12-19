@@ -12,94 +12,94 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface Message
  */
 export interface Message {
-  /**
-   *
-   * @type {number}
-   * @memberof Message
-   */
-  messageId?: number
-  /**
-   *
-   * @type {number}
-   * @memberof Message
-   */
-  placeId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof Message
-   */
-  message?: string
-  /**
-   *
-   * @type {Date}
-   * @memberof Message
-   */
-  date?: Date
-  /**
-   *
-   * @type {number}
-   * @memberof Message
-   */
-  flow?: number
-  /**
-   *
-   * @type {number}
-   * @memberof Message
-   */
-  temperature?: number
+    /**
+     * 
+     * @type {number}
+     * @memberof Message
+     */
+    messageId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Message
+     */
+    placeId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Message
+     */
+    message?: string;
+    /**
+     * 
+     * @type {Date}
+     * @memberof Message
+     */
+    date?: Date;
+    /**
+     * 
+     * @type {number}
+     * @memberof Message
+     */
+    flow?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Message
+     */
+    temperature?: number;
 }
 
 /**
  * Check if a given object implements the Message interface.
  */
 export function instanceOfMessage(value: object): value is Message {
-  return true
+    return true;
 }
 
 export function MessageFromJSON(json: any): Message {
-  return MessageFromJSONTyped(json, false)
+    return MessageFromJSONTyped(json, false);
 }
 
 export function MessageFromJSONTyped(json: any, ignoreDiscriminator: boolean): Message {
-  if (json == null) {
-    return json
-  }
-  return {
-    messageId: json['messageId'] == null ? undefined : json['messageId'],
-    placeId: json['placeId'] == null ? undefined : json['placeId'],
-    message: json['message'] == null ? undefined : json['message'],
-    date: json['date'] == null ? undefined : new Date(json['date']),
-    flow: json['flow'] == null ? undefined : json['flow'],
-    temperature: json['temperature'] == null ? undefined : json['temperature'],
-  }
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'messageId': json['messageId'] == null ? undefined : json['messageId'],
+        'placeId': json['placeId'] == null ? undefined : json['placeId'],
+        'message': json['message'] == null ? undefined : json['message'],
+        'date': json['date'] == null ? undefined : (new Date(json['date'])),
+        'flow': json['flow'] == null ? undefined : json['flow'],
+        'temperature': json['temperature'] == null ? undefined : json['temperature'],
+    };
 }
 
 export function MessageToJSON(json: any): Message {
-  return MessageToJSONTyped(json, false)
+    return MessageToJSONTyped(json, false);
 }
 
-export function MessageToJSONTyped(
-  value?: Message | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function MessageToJSONTyped(value?: Message | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    messageId: value['messageId'],
-    placeId: value['placeId'],
-    message: value['message'],
-    date: value['date'] == null ? undefined : value['date'].toISOString().substring(0, 10),
-    flow: value['flow'],
-    temperature: value['temperature'],
-  }
+    return {
+        
+        'messageId': value['messageId'],
+        'placeId': value['placeId'],
+        'message': value['message'],
+        'date': value['date'] == null ? undefined : ((value['date']).toISOString().substring(0,10)),
+        'flow': value['flow'],
+        'temperature': value['temperature'],
+    };
 }
+

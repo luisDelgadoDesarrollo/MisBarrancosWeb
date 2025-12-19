@@ -12,73 +12,62 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime'
+import { mapValues } from '../runtime';
 /**
- *
+ * 
  * @export
  * @interface CanyonDifficulty
  */
 export interface CanyonDifficulty {
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonDifficulty
-   */
-  descentNumber?: number
-  /**
-   *
-   * @type {number}
-   * @memberof CanyonDifficulty
-   */
-  canyonId?: number
-  /**
-   *
-   * @type {string}
-   * @memberof CanyonDifficulty
-   */
-  difficultyDesc?: string
+    /**
+     * 
+     * @type {number}
+     * @memberof CanyonDifficulty
+     */
+    canyonId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CanyonDifficulty
+     */
+    difficultyDesc?: string;
 }
 
 /**
  * Check if a given object implements the CanyonDifficulty interface.
  */
 export function instanceOfCanyonDifficulty(value: object): value is CanyonDifficulty {
-  return true
+    return true;
 }
 
 export function CanyonDifficultyFromJSON(json: any): CanyonDifficulty {
-  return CanyonDifficultyFromJSONTyped(json, false)
+    return CanyonDifficultyFromJSONTyped(json, false);
 }
 
-export function CanyonDifficultyFromJSONTyped(
-  json: any,
-  ignoreDiscriminator: boolean,
-): CanyonDifficulty {
-  if (json == null) {
-    return json
-  }
-  return {
-    descentNumber: json['descentNumber'] == null ? undefined : json['descentNumber'],
-    canyonId: json['canyonId'] == null ? undefined : json['canyonId'],
-    difficultyDesc: json['difficultyDesc'] == null ? undefined : json['difficultyDesc'],
-  }
+export function CanyonDifficultyFromJSONTyped(json: any, ignoreDiscriminator: boolean): CanyonDifficulty {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'canyonId': json['canyonId'] == null ? undefined : json['canyonId'],
+        'difficultyDesc': json['difficultyDesc'] == null ? undefined : json['difficultyDesc'],
+    };
 }
 
 export function CanyonDifficultyToJSON(json: any): CanyonDifficulty {
-  return CanyonDifficultyToJSONTyped(json, false)
+    return CanyonDifficultyToJSONTyped(json, false);
 }
 
-export function CanyonDifficultyToJSONTyped(
-  value?: CanyonDifficulty | null,
-  ignoreDiscriminator: boolean = false,
-): any {
-  if (value == null) {
-    return value
-  }
+export function CanyonDifficultyToJSONTyped(value?: CanyonDifficulty | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
 
-  return {
-    descentNumber: value['descentNumber'],
-    canyonId: value['canyonId'],
-    difficultyDesc: value['difficultyDesc'],
-  }
+    return {
+        
+        'canyonId': value['canyonId'],
+        'difficultyDesc': value['difficultyDesc'],
+    };
 }
+

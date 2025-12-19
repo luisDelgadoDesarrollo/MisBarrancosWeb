@@ -1,6 +1,4 @@
-.openapi-generator-ignore
-apis/ActivityApi.ts
-apis/ArticleApi.ts
+apis/AdApi.ts
 apis/CanyonApi.ts
 apis/ImageApi.ts
 apis/MessageApi.ts
@@ -8,11 +6,9 @@ apis/ReviewApi.ts
 apis/UserApi.ts
 apis/index.ts
 index.ts
-models/Activity.ts
-models/ActivityType.ts
-models/Article.ts
+models/Ad.ts
+models/AdLog.ts
 models/Canyon.ts
-models/CanyonCanyonNear.ts
 models/CanyonControlLevel.ts
 models/CanyonDescent.ts
 models/CanyonDifficulty.ts
@@ -26,11 +22,8 @@ models/CanyonSchedule.ts
 models/ImagesImageDirGet404Response.ts
 models/LocationCanyon.ts
 models/Message.ts
-models/MessageIn.ts
 models/MessageOut.ts
 models/ModelError.ts
-models/SimpleActivity.ts
-models/SimpleArticle.ts
 models/SimpleCanyon.ts
 models/SimpleCanyonReview.ts
 models/SimpleUser.ts
