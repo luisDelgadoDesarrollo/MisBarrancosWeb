@@ -50,8 +50,7 @@
         />
       </v-list-item>
     </v-list>
-
-    <div ref="loadMoreTrigger" class="text-center my-4">
+    <div  v-if="hasMore" ref="loadMoreTrigger" class="text-center my-4">
       <v-progress-circular v-if="loading" indeterminate color="primary" />
     </div>
   </v-container>
@@ -91,6 +90,7 @@ const canyons = ref<CanyonCardInfo[]>([])
 const page = ref(0)
 const pageSize = 100
 const loading = ref(false)
+const hasMore = ref(true)
 let observer: IntersectionObserver | null = null
 const loadMoreTrigger = ref<HTMLElement | null>(null)
 let firstPage = true
@@ -139,16 +139,24 @@ const clearFilters = () => {
 }
 
 const loadMore = async () => {
-  if (loading.value) return
+  if (loading.value || !hasMore.value) return
   loading.value = true
   try {
     const newCanyons = await getCanyons(page.value, pageSize)
+
+    if (newCanyons.length === 0) {
+      hasMore.value = false
+      observer?.disconnect() // 💀 MUY IMPORTANTE
+      return
+    }
+
     if (!firstPage) {
       canyons.value.push(...newCanyons)
     } else {
       canyons.value = newCanyons
       firstPage = false
     }
+
     page.value += 1
   } catch (error) {
     console.error(error)

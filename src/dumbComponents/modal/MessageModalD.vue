@@ -64,8 +64,7 @@ async function getMessageWithAuthHelper(page: number): Promise<MessageCardInfo[]
   if (!props.canyon) return [] // No canyon, no messages
 
   const rawMessage = await messageApi.getMessages({
-    activityId: props.canyon,
-    activityType: 'CANYON',
+    canyonId: props.canyon,
     page,
   })
   return rawMessage.map((message) => ({

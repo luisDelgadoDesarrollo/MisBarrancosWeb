@@ -315,7 +315,7 @@ const localCanyonDescents = ref(props.canyon?.canyonDescent ?? [])
 const localCanyonSchedule = ref(props.canyon?.canyonSchedule ?? [])
 const localCanyonLink = ref(props.canyon?.canyonLink ?? [])
 const localCanyonProhibitions = ref(props.canyon?.canyonProhibition ?? [])
-const localCanyonDifficulty = ref(props.canyon?.canyonDifficulty?.[0].difficultyDesc)
+const localCanyonDifficulty = ref(props.canyon?.difficultyDesc)
 const localCanyonControlLevel = ref(props.canyon?.canyonControlLevel ?? [])
 
 const resultValidations = () => {
@@ -368,9 +368,7 @@ const buildCanyonToSave = (): Canyon => {
   canyonToSave.canyonSchedule = localCanyonSchedule.value
   canyonToSave.canyonLink = localCanyonLink.value
   canyonToSave.canyonProhibition = localCanyonProhibitions.value
-  canyonToSave.canyonDifficulty = [
-    { canyonId: props.canyon?.canyonId ?? undefined, difficultyDesc: localCanyonDifficulty.value },
-  ]
+  canyonToSave.difficultyDesc = localCanyonDifficulty.value
   canyonToSave.canyonControlLevel = localCanyonControlLevel.value
 
   return canyonToSave

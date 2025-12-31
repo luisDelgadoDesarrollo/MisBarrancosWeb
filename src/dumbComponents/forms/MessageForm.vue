@@ -63,22 +63,20 @@ const send = async () => {
   if (props.messageId) {
     message = await updateMessage({
       messageId: props.messageId!,
-      messageIn: {
+      message: {
         placeId: props.placeId!,
         date: buildNeutralDate(localDate.value),
         flow: selectedFlow.value,
-        typePlace: 'CANYON',
         temperature: selectedTemperature.value,
         message: localMessage.value,
       },
     })
   } else {
     message = await postMessage({
-      messageIn: {
+      message: {
         placeId: props.placeId!,
         date: buildNeutralDate(localDate.value),
         flow: selectedFlow.value,
-        typePlace: 'CANYON',
         temperature: selectedTemperature.value,
         message: localMessage.value,
       },
