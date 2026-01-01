@@ -1,7 +1,7 @@
-import { ImageApi, type ImagesImageDirGetRequest, type PostImageRequest } from '@/api'
+import { type ImagesImageDirGetRequest, type PostImageRequest } from '@/api'
 import { withAuthHeaderMultiPartFormData } from './ApiUtils'
+import { imageApi } from '@/api/apiConfig'
 
-const imageApi = new ImageApi()
 
 export async function getImage(requestParameters: ImagesImageDirGetRequest): Promise<Blob> {
   const initOverrides = withAuthHeaderMultiPartFormData({

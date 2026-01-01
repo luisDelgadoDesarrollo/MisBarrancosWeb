@@ -20,12 +20,10 @@
   </v-dialog>
 </template>
 <script setup lang="ts">
-import { AdApi, ImageApi, type Ad } from '@/api';
+import { type Ad } from '@/api';
+import { adApi, imageApi } from '@/api/apiConfig';
 import { onMounted, ref, watch } from 'vue';
 
-
-const adApi = new AdApi()
-const imageApi = new ImageApi()
 const imageUrl = ref<string | undefined>(undefined)
 
 

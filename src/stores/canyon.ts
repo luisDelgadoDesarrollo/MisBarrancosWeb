@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
 import type { Canyon } from '@/api'
-import { CanyonApi } from '@/api'
 import { getCanyonWithAuth } from '@/calls/CanyonCalls'
 import { useUserStore } from './user'
+import { canyonApi } from '@/api/apiConfig'
 
-const canyonApi = new CanyonApi()
 
 interface CanyonState {
   canyon: Canyon | null

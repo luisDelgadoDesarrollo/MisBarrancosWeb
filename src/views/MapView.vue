@@ -6,12 +6,12 @@
 import { onMounted } from 'vue'
 import * as L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { CanyonApi, type LocationCanyon, type SimpleCanyon } from '@/api'
+import { type LocationCanyon, type SimpleCanyon } from '@/api'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import { getAllFavourites } from '@/calls/CanyonCalls'
+import { canyonApi } from '@/api/apiConfig'
 
-const canyonApi = new CanyonApi()
 const user = useUserStore()
 onMounted(async () => {
   const greenIcon = L.divIcon({

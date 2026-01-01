@@ -46,7 +46,7 @@ export interface UpdateMessageRequest {
 }
 
 /**
- *
+ * 
  */
 export class MessageApi extends runtime.BaseAPI {
 

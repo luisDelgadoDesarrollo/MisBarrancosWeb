@@ -1,7 +1,7 @@
-import { UserApi, type GetUserRequest, type UpdatePasswordOperationRequest, type UpdateUserRequest, type UserOut } from '@/api'
+import { type GetUserRequest, type UpdatePasswordOperationRequest, type UpdateUserRequest, type UserOut } from '@/api'
 import { withAuthHeaderApplicationJson } from './ApiUtils'
+import { userApi } from '@/api/apiConfig'
 
-const userApi = new UserApi()
 
 export async function getUserWithAuth(requestParameters: GetUserRequest): Promise<UserOut> {
   const initOverrides = withAuthHeaderApplicationJson({

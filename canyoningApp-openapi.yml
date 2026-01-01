@@ -6,8 +6,9 @@ info:
     email: delgadofernandez.luis@gmail.com
   version: 0.0.1
 servers:
-  - url: http://localhost:8080
+  #- url: http://localhost:8080
   #- url: https://misbarrancosbdesarrollo.com:8443
+  - url: /
 tags:
   - name: User
     description: User operations

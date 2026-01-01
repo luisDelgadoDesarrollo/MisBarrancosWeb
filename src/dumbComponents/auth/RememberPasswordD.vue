@@ -13,11 +13,10 @@
   </v-sheet>
 </template>
 <script setup lang="ts">
-import { UserApi } from '@/api'
+import { userApi } from '@/api/apiConfig'
 import { ref } from 'vue'
 
 const model = defineModel<boolean>()
-const userApi = new UserApi()
 const email = ref('')
 
 function sendRequestUpdatePassword() {

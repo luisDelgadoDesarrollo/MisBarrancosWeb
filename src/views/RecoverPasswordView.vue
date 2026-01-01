@@ -51,11 +51,10 @@
 </template>
 
 <script setup lang="ts">
-import { UserApi } from "@/api";
 import { ref } from "vue";
 import { runValidations, validateEqualPassword, validateLengthPassword } from "@/utils/Validations";
 import { useRoute, useRouter } from "vue-router";
-const userApi = new UserApi()
+import { userApi } from "@/api/apiConfig";
 const route = useRoute()
 const router = useRouter()
 

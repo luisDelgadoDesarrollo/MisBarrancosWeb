@@ -111,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import { type CreateUserRequest, UserApi, type UserCreate } from '@/api'
+import { type CreateUserRequest, type UserCreate } from '@/api'
 import { onMounted, ref } from 'vue'
 import {
   maxLongitud,
@@ -127,10 +127,9 @@ import { watch } from 'vue'
 import { isMobileCheck } from '@/utils/Responsive'
 import ImagePickerD from '../ImagePickerD.vue'
 import { postImage } from '@/calls/ImageCalls'
+import { userApi } from '@/api/apiConfig'
 
 const authDialog = useAuthDialog()
-
-const userApi = new UserApi()
 
 const date = ref<Date | undefined>(undefined)
 const passwordCopy = ref('')

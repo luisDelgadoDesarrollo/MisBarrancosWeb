@@ -31,15 +31,15 @@
   ></v-sheet>
 </template>
 <script setup lang="ts">
-import { UserApi, type LoginRequest } from '@/api'
+import { type LoginRequest } from '@/api'
 import { useAuthDialog } from '@/stores/dialogs'
 import { ref } from 'vue'
 import RememberPasswrodD from './RememberPasswordD.vue'
 import { useUserStore } from '@/stores/user'
+import { userApi } from '@/api/apiConfig'
 
 const errorLogin = ref(false)
 const show1 = ref(true)
-const userApi = new UserApi()
 const rememberPassword = ref<boolean>(false)
 const userStore = useUserStore()
 const login = ref<LoginRequest>({

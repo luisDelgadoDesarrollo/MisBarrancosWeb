@@ -43,12 +43,12 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, onBeforeUnmount, nextTick } from 'vue'
 import MessageCard from '../cards/MessageCardD.vue'
-import { MessageApi, type MessageOut } from '@/api'
+import { type MessageOut } from '@/api'
 import type { MessageCardInfo } from '@/interfaces/MessageCardInfo'
 import { useUserStore } from '@/stores/user'
 import MessageForm from '../forms/MessageForm.vue'
+import { messageApi } from '@/api/apiConfig'
 
-const messageApi = new MessageApi()
 const userStore = useUserStore()
 const props = withDefaults(defineProps<{ canyon?: number }>(), {})
 const messageForm = ref(false)

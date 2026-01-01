@@ -66,12 +66,11 @@ import { ref, onMounted, watch, computed, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CanyonCard from '@/dumbComponents/cards/CanyonCard.vue'
 import type { CanyonCardInfo } from '@/interfaces/CanyonCardInfo'
-import { CanyonApi } from '@/api'
 import { useCanyonStore } from '@/stores/canyon'
 import CanyonForm from '../forms/CanyonForm.vue'
 import { getFavouritesCanyons } from '@/calls/CanyonCalls'
+import { canyonApi } from '@/api/apiConfig'
 
-const canyonApi = new CanyonApi()
 const canyonPinia = useCanyonStore()
 const name = ref<string | undefined>()
 const season = ref<string | undefined>()

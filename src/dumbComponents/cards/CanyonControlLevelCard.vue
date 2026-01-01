@@ -34,10 +34,11 @@
 </template>
 
 <script setup lang="ts">
-import { ImageApi, type CanyonControlLevel } from '@/api'
+import { type CanyonControlLevel } from '@/api'
 import { ref, watch, watchEffect } from 'vue'
 import CanyonControlLevelForm from '../forms/CanyonControlLevelForm.vue'
 import { createImageStore } from '@/stores/images'
+import { imageApi } from '@/api/apiConfig';
 const props = defineProps<{
   canyonControlLevel?: CanyonControlLevel
   updatable?: boolean
@@ -49,7 +50,6 @@ const emit = defineEmits<{
   (e: 'delete', canyonControlLevel: CanyonControlLevel): void
 }>()
 
-const imageApi = new ImageApi()
 const imageUrl = ref<string | undefined>(undefined)
 
 const openForm = ref(false)

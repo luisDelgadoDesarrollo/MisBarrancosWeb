@@ -1,12 +1,11 @@
 import {
-  MessageApi,
   type MessageOut,
   type PostMessageRequest,
   type UpdateMessageRequest,
 } from '@/api'
 import { withAuthHeaderApplicationJson } from './ApiUtils'
+import { messageApi } from '@/api/apiConfig'
 
-const messageApi = new MessageApi()
 
 export async function postMessage(requestParameters: PostMessageRequest): Promise<MessageOut> {
   const initOverrides = withAuthHeaderApplicationJson({

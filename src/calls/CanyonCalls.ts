@@ -10,9 +10,8 @@ import type {
   UpdateCanyonRequest,
 } from '@/api'
 import { withAuthHeaderApplicationJson } from './ApiUtils'
-import { CanyonApi } from '@/api'
+import { canyonApi } from '@/api/apiConfig'
 
-const canyonApi = new CanyonApi()
 
 async function getCanyonWithAuth(requestParameters: GetCanyonRequest): Promise<Canyon> {
   // Instancia de tu cliente API

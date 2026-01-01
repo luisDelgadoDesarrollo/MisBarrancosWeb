@@ -129,7 +129,6 @@ import { useCanyonStore } from '@/stores/canyon'
 import { onMounted, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
-import { ImageApi } from '@/api'
 import CanyonBasicD from '../CanyonBasicD.vue'
 import MessageModalD from './MessageModalD.vue'
 import ExpansionPanelGroupD from '../ExpansionPanelGroupD.vue'
@@ -137,11 +136,11 @@ import { useUserStore } from '@/stores/user'
 import { isMobileCheck } from '@/utils/Responsive'
 import { downloadCanyonWithAuth } from '@/calls/CanyonCalls'
 import CanyonForm from '../forms/CanyonForm.vue'
+import { imageApi } from '@/api/apiConfig'
 
 const route = useRoute()
 const canyonPinia = useCanyonStore()
 const userStore = useUserStore()
-const imageApi = new ImageApi()
 
 const downloadDialog = ref(false)
 const updateCanyon = ref(false)
