@@ -189,7 +189,7 @@ paths:
                 $ref: '#/components/schemas/Ad'
         404:
           $ref: '#/components/responses/404NotFound'
-  /ad/date/{date}:
+  /ad/date:
     get:
       tags:
         - Ad
@@ -198,11 +198,11 @@ paths:
       operationId: getAdByDate
       parameters:
         - name: date
-          in: path
+          in: query
           required: true
           schema:
             type: string
-            format: date
+            example: '2026-01-04'
       responses:
         200:
           description: Successful operation
@@ -226,7 +226,7 @@ paths:
             schema:
               $ref: '#/components/schemas/UserCreate'
         required: true
-      security: [ ]
+      security: []
       responses:
         200:
           description: Successful operation
@@ -395,7 +395,7 @@ paths:
       summary: Update a password
       description: Return your password
       operationId: updatePassword
-      security: [ ]
+      security: []
       parameters:
         - name: email
           in: query
@@ -428,7 +428,7 @@ paths:
       summary: Request update a password
       description: Request update a password, it send an email and the user could change its password for an hour
       operationId: requestUpdatePassword
-      security: [ ]
+      security: []
       parameters:
         - name: email
           in: query
@@ -547,7 +547,7 @@ paths:
           required: false
           schema:
             type: string
-            default: "canyonId,asc"
+            default: 'canyonId,asc'
       x-spring-paginated: true
       responses:
         201:
@@ -622,7 +622,7 @@ paths:
           required: false
           schema:
             type: string
-            default: "canyonId,asc"
+            default: 'canyonId,asc'
       x-spring-paginated: true
       responses:
         201:
@@ -847,7 +847,7 @@ paths:
           required: false
           schema:
             type: string
-            default: "reviewId,asc"
+            default: 'reviewId,asc'
       x-spring-paginated: true
       responses:
         200:
@@ -1032,7 +1032,7 @@ paths:
           required: false
           schema:
             type: string
-            default: "messageId,desc"
+            default: 'messageId,desc'
       x-spring-paginated: true
       responses:
         200:
@@ -1543,4 +1543,4 @@ components:
       schema:
         type: integer
 security:
-  - basic: [ ]
+  - basic: []

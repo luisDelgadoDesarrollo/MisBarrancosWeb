@@ -19,16 +19,16 @@
 import HeaderD from './dumbComponents/HeaderD.vue'
 import FooterD from './dumbComponents/FooterD.vue'
 import AdModal from './dumbComponents/modal/AdModal.vue'
-import {  type Ad } from './api';
-import { onMounted, ref } from 'vue';
-import { adApi } from './api/apiConfig';
+import { type Ad } from './api'
+import { onMounted, ref } from 'vue'
+import { adApi } from './api/apiConfig'
 
 const ad = ref<Ad | undefined>(undefined)
 
-
 onMounted(async () => {
-  const today = new Date();
-  ad.value = await adApi.getAdByDate({date: today})
+  console.log('Entra')
+  const today = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
+  ad.value = await adApi.getAdByDate({ date: today })
 })
 </script>
 

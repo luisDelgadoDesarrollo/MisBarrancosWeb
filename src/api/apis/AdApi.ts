@@ -39,7 +39,7 @@ export interface GetAdRequest {
 }
 
 export interface GetAdByDateRequest {
-    date: Date;
+    date: string;
 }
 
 export interface GetAdsRequest {
@@ -229,13 +229,17 @@ export class AdApi extends runtime.BaseAPI {
 
         const queryParameters: any = {};
 
+        if (requestParameters['date'] != null) {
+            queryParameters['date'] = requestParameters['date'];
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && (this.configuration.username !== undefined || this.configuration.password !== undefined)) {
             headerParameters["Authorization"] = "Basic " + btoa(this.configuration.username + ":" + this.configuration.password);
         }
         const response = await this.request({
-            path: `/ad/date/{date}`.replace(`{${"date"}}`, encodeURIComponent(String(requestParameters['date']))),
+            path: `/ad/date`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
