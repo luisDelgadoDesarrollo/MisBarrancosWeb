@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue'
 const props = withDefaults(
   defineProps<{
     id?: number

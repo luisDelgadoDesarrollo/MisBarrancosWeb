@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="message-card">
     <v-col>
       <v-row align-content="center">
         <v-col class="d-flex align-center">
@@ -82,3 +82,46 @@ const messageCreatedByTheUserAuth = computed(() => {
   return localStorage.getItem('email') === props.user?.email
 })
 </script>
+
+<style scoped>
+.message-card {
+  position: relative;
+  padding: 24px;
+  margin: 16px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+  cursor: pointer;
+  overflow: hidden; /* importante para limitar el overlay al card */
+}
+
+.message-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transition: background-color 0.2s ease;
+  pointer-events: none; /* para que no bloquee clics */
+}
+
+.message-card:hover::after {
+  background-color: rgba(0, 0, 0, 0.04); /* overlay gris MUY suave */
+}
+
+.message-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.card-title {
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.card-info {
+  margin: 6px 0;
+  font-size: 1rem;
+}
+</style>

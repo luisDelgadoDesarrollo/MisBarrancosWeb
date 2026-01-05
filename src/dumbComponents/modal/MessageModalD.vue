@@ -4,7 +4,7 @@
     <v-container class="scrollContainer" fluid>
       <v-col>
         <v-list v-if="messages.length > 0">
-          <v-list-item v-for="card in messages" :key="card.messageId">
+          <v-list-item v-for="card in messages" :key="card.messageId" class="clickable">
             <MessageCard
               :messageId="card.messageId"
               :placeId="card.placeId"
@@ -32,6 +32,9 @@
     <div class="d-flex justify-end px-4 py-2">
       <v-btn v-if="userStore.isUserLogged" color="primary" @click="messageForm = true"
         >Mandar mensaje</v-btn
+      ><v-text v-else
+        >Para mandar un mensaje, asi como descargar la reseña o modificar la informacion del
+        barranco, tienes que estar con la sesion iniciada</v-text
       >
     </div>
     <v-dialog v-model="messageForm">
@@ -174,5 +177,12 @@ const handleCreateMessage = (message?: MessageOut) => {
 .scrollContainer {
   height: 30vh;
   overflow-y: auto;
+}
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  box-shadow: var(--v-shadow-8);
 }
 </style>
