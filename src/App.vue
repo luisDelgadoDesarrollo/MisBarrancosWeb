@@ -6,7 +6,7 @@
 
     <main class="main-content">
       <router-view />
-      <AdModal :ad="ad"></AdModal>
+      <AdModal v-if="ad?.adId" :ad="ad"></AdModal>
     </main>
 
     <footer>
