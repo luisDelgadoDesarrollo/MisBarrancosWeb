@@ -26,9 +26,13 @@ import { adApi } from './api/apiConfig'
 const ad = ref<Ad | undefined>(undefined)
 
 onMounted(async () => {
-  console.log('Entra')
-  const today = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
-  ad.value = await adApi.getAdByDate({ date: today })
+  const today = new Date().toISOString().slice(0, 10)
+  const result = await adApi.getAdByDate({ date: today })
+  if (result && result.adId) {
+    ad.value = result
+  } else {
+    ad.value = undefined
+  }
 })
 </script>
 
